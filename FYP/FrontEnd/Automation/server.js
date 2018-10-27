@@ -29,12 +29,26 @@ app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
 
-app.post('/login', (req,res) => {
-  console.log(req.body)
-  res.send({ "auth": 'success' });
+app.post('/register', (req,res) => {
+  const User = require('./models/Auth/Auth');
 
+  console.log(req.body)
+
+  User.username = req.body.username;
+  User.id = req.body.id;
+  User.email = req.body.email;
+  User.password = req.body.password
+
+  User.save( (err, user) => {
+    if(err) throw err;
+    res.send(user);
+  })
 })
 
+app.post('/login', (req,res) => {
+  const UserCredentials = require('./models/Auth/Auth');
+  UserCredentials
+})
 
 app.listen(port, () =>
   console.log(`Listening on port ${port}`)
