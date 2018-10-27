@@ -39,7 +39,7 @@ app.post('/register', (req,res) => {
   User.email = req.body.email;
   User.password = req.body.password
 
-  User.save( (err, user) => {
+  User.create( req.body,(err, user) => {
     if(err) throw err;
     res.send(user);
   })
