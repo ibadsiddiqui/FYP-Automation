@@ -1,11 +1,10 @@
 {
   "name": "example-create-react-app-express",
   "version": "1.0.0",
-  "description": "Example on using create-react-app with a Node Express Backend",
+  "description": "Backend for FYP Automation",
   "author": {
-    "name": "Esau Silva",
-    "email": "esausilva85@gmail.com",
-    "url": "https://esausilva.com"
+    "name": "Ibad Siddiqui",
+    "email": "esausilva85@gmail.com"
   },
   "license": "MIT",
   "scripts": {
@@ -17,6 +16,7 @@
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3"
   },
   "devDependencies": {
