@@ -1,9 +1,14 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser')
 
 const app = express();
+
+mongoose.connect('mongodb://localhost/Automation');
 const port = process.env.PORT || 4000;
+
+
 
 
 if (process.env.NODE_ENV === 'production') {
