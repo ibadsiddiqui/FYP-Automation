@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const app = express();
 
 mongoose.connect('mongodb://localhost/Automation');
+const User = require('./models/User/User')
 const port = process.env.PORT || 4000;
 
 
@@ -22,32 +23,80 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-// API calls
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
+// registration process
+app.post('/register', async (request, response) => {
 
-app.post('/register', (req,res) => {
-  const User = require('./models/Auth/Auth');
+  const name = request.body.name;
+  const username = request.body.username;
+  const email = request.body.email;
+  const password = request.body.password;
 
-  console.log(req.body)
+  var registered;
+  await User.getUserByUsername(username, (err, user) => {
+    if (err) throw err;
+    if (user !== null) {
+      registered = true
+    } else {
+      registered = false;
+    }
 
-  User.username = req.body.username;
-  User.id = req.body.id;
-  User.email = req.body.email;
-  User.password = req.body.password
+    console.log(registered)
 
-  User.create( req.body,(err, user) => {
-    if(err) throw err;
-    res.send(user);
-  })
+    if (registered == true) {
+      response.send({
+        registered: true, error: "User by this name Exit"
+      })
+    } else if (registered == false) {
+      const newUser = new User({
+        name: name,
+        username: username,
+        email: email,
+        password: password
+      });
+      User.registerUser(newUser, (err, user) => {
+        if (err)
+          response.send({ auth: "Error in creating new user. Please try again" })
+        response.send({ auth: "Successful" })
+      })
+    }
+  });
+
 })
 
-app.post('/login', (req,res) => {
-  const UserCredentials = require('./models/Auth/Auth');
-  UserCredentials
+app.post('/login', (request, response) => {
+
+  const username = request.body.username;
+  const password = request.body.password;
+
+
+  var isRegistered;
+  User.getUserByUsername(username, (err, user) => {
+    if (err) throw err;
+    if (user !== null) {
+      isRegistered = true
+    } else {
+      isRegistered = false;
+    }
+
+    console.log(isRegistered)
+
+    if (isRegistered == true) {
+
+      User.comparePassword(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+        if (isMatch) {
+          response.send({ message: "Password Matched" })
+        } else {
+          response.send({ message: "Wrong Password" })
+        }
+      })
+    } else {
+      response.send({message: 'Not registered'})
+    }
+  });
+
 })
 
 app.listen(port, () =>
