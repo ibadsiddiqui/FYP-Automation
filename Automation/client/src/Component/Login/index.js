@@ -1,9 +1,51 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.setUsername = this.setUsername.bind(this);
+        this.setUsername = this.setUsername.bind(this);
+        this.onLogin = this.onLogin.bind(this);
+        this.state = {
+            username: '',
+            password: '',
+        }
+    }
+
+    setUsername(event) {
+        this.setState({
+            username: event.target.value
+        })
+    }
+
+    setPassword(event) {
+        this.setState({
+            password: event.target.value
+        })
+    }
+    onLogin() {
+        console.log(this.state)
+        // await fetch('/register', {
+        //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Accept": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         username: this.state.username,
+        //         password: this.state.password,
+        //     }),
+        // })
+        // .then(async res => await res.json())
+        // .then(res => {
+        //        this.setState({
+        //             doesUserNameExist: res.response
+        //         })
+        //     } 
+        // );
+    }
     render() {
         return (
-
             <div className="container">
                 <div className="card card-login mx-auto mt-5">
                     <div className="card-header">Login</div>
@@ -11,13 +53,24 @@ export default class Login extends Component {
                         <form>
                             <div className="form-group">
                                 <div className="form-label-group">
-                                    <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="required" autoFocus="autofocus" />
-                                    <label htmlFor="inputEmail">Email address</label>
+                                    <input  type="text" 
+                                            id="inputEmail" 
+                                            className="form-control" 
+                                            placeholder="Enter Username" 
+                                            required="required" 
+                                            autoFocus="autofocus"
+                                            onChange={(event) => this.setUsername(event)} />
+                                    <label htmlFor="inputEmail">Enter Username</label>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="form-label-group">
-                                    <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="required" />
+                                    <input  type="password" 
+                                            id="inputPassword" 
+                                            className="form-control" 
+                                            placeholder="Password" 
+                                            required="required"
+                                            onChange={(event) => this.setPassword(event)}/>
                                     <label htmlFor="inputPassword">Password</label>
                                 </div>
                             </div>
@@ -25,11 +78,13 @@ export default class Login extends Component {
                                 <div className="checkbox">
                                     <label>
                                         <input type="checkbox" value="remember-me" />
-                                        Remember Password
+                                        {'\t'} Remember Password
                                     </label>
                                 </div>
                             </div>
-                            <a className="btn btn-primary btn-block" href="index.html">Login</a>
+                            <a  className="btn btn-primary btn-block" 
+                                href="#" 
+                                onClick={this.onLogin}>Login</a>
                         </form>
                         <div className="text-center">
                             <Link className="d-block small mt-3" to="/register">Register an Account</Link>
