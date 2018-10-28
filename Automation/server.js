@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // registration process
 app.post('/register', async (request, response) => {
-
+  console.log(request.body)
   const name = request.body.name;
   const username = request.body.username;
   const email = request.body.email;
