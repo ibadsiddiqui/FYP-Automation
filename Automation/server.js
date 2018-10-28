@@ -34,35 +34,54 @@ app.post('/register', async (request, response) => {
   const password = request.body.password;
 
   var registered;
+
   await User.getUserByUsername(username, (err, user) => {
     if (err) throw err;
-    if (user !== null) {
-      registered = true
+    if (user === null) {
+      registered = false
     } else {
-      registered = false;
+      registered = true;
     }
 
     console.log(registered)
 
-    if (registered == true) {
-      response.send({
-        registered: true, error: "User by this name Exit"
-      })
-    } else if (registered == false) {
+    if (registered === true) {
+
+      // meaning user is already registered by that username
+      response.send({ registration: false })
+
+    } else if (registered === false) {
+
+      // following steps registers a new user and sends response
       const newUser = new User({
         name: name,
         username: username,
         email: email,
         password: password
       });
+
       User.registerUser(newUser, (err, user) => {
         if (err)
-          response.send({ auth: "Error in creating new user. Please try again" })
-        response.send({ auth: "Successful" })
+          response.send({ registration: "Error in creating new user. Please try again" })
+        response.send({ registration: true })
       })
     }
   });
 
+})
+
+app.post('/getusername', (request, response) => {
+  const username = request.body.username;
+  User.getUserByUsername(username, (err, user) => {
+    if (err) throw err;
+    if (user !== null) {
+      isRegistered = true
+    } else {
+      isRegistered = false;
+    }
+    response.send({response: isRegistered})
+
+  })
 })
 
 app.post('/login', (request, response) => {
@@ -93,7 +112,7 @@ app.post('/login', (request, response) => {
         }
       })
     } else {
-      response.send({message: 'Not registered'})
+      response.send({ message: 'Not registered' })
     }
   });
 

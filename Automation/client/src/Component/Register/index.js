@@ -9,6 +9,8 @@ export default class Register extends Component {
             email: '',
             username: '',
             password: '',
+            hasUserBeenRegistered: false,
+            doesUserNameExist: false
         };
 
     }
@@ -31,6 +33,7 @@ export default class Register extends Component {
         })
 
     }
+
     checkPassword(event) {
         if (this.state.password === event.target.value) {
             return true
@@ -38,26 +41,44 @@ export default class Register extends Component {
             return false
         }
     }
-    setUsername(event) {
-        this.setState({
+
+
+    async setUsername(event) {
+        await this.setState({
             username: event.target.value
+        });
+
+        await fetch('/getusername', {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+            }),
         })
+            .then(async res => await res.json())
+            .then(res => this.setState({
+                doesUserNameExist: res.response
+            }));
+
     }
 
     async callLoginApi() {
-        const data = this.state;
+
         const response = await fetch('/register', {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "no-cors", // no-cors, cors, *same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, same-origin, *omit
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                // "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "application/json",
+                "Accept": "application/json",
             },
-            redirect: "follow", // manual, *follow, error
-            referrer: "no-referrer", // no-referrer, *client
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                name: this.state.name,
+                email: this.state.email,
+                username: this.state.username,
+                password: this.state.password,
+            }),
         });
 
         const body = await response.json();
@@ -68,11 +89,18 @@ export default class Register extends Component {
     };
 
     onRegister() {
-        // this.callApi()
-        //     .then(res => this.setState({ response: res.express }))
-        //     .catch(err => console.log(err));
-        console.log(this.state)
+        if (this.state.doesUserNameExist) {
+            return;
+        } else {
+            this.callLoginApi()
+                .then(res => this.setState({
+                    hasUserBeenRegistered: res.registration
+                }))
+                .catch(err => console.log(err));
+        }
+
     }
+
 
     render() {
         return (
@@ -147,14 +175,79 @@ export default class Register extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link className="btn btn-primary btn-block" to="/" onClick={this.onRegister}>Register</Link>
+                            {
+                                this.state.email !== "" && this.state.name !== ""
+                                && this.state.username && this.state.password !== ""
+                                &&
+
+
+                                <Link className="btn btn-primary btn-block"
+                                    to="/"
+                                    onClick={this.onRegister}
+                                    data-toggle={(this.state.doesUserNameExist) ? "modal" : null}
+                                    data-target={(this.state.doesUserNameExist) ? "#exampleModal" : null}>
+
+                                    Register
+                                    </Link>
+
+                            }
+
                         </form>
                         <div className="text-center">
                             <Link className="d-block small mt-3" to="/">Already have an account? Click here.</Link>
                         </div>
                     </div>
                 </div>
-            </div >
+
+                {
+
+                }
+
+                {/* Modal for existing user */}
+                <div className="modal fade" id="exampleModal" tabIndex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    {
+                        this.state.doesUserNameExist
+                        &&
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">User Already Exist </h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    Please try again. A user by that username already exist.
+                                    </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    {
+                        !this.state.doesUserNameExist
+                        &&
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Welcome New User</h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    You have been successfully registered.
+                                    </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
 
         )
     }
