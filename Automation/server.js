@@ -106,13 +106,22 @@ app.post('/login', (request, response) => {
       User.comparePassword(password, user.password, (err, isMatch) => {
         if (err) throw err;
         if (isMatch) {
-          response.send({ message: "Password Matched" })
+          response.send({ 
+            message: "Password Matched",
+            auth: true
+          })
         } else {
-          response.send({ message: "Wrong Password" })
+          response.send({ 
+            message: "Wrong Password",
+            auth: false,
+          })
         }
       })
     } else {
-      response.send({ message: 'Not registered' })
+      response.send({ 
+        message: 'Not registered',
+        auth: false
+      })
     }
   });
 
