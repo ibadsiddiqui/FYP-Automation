@@ -10,7 +10,8 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            doesUserNameExist: null
+            doesUserNameExist: null,
+            auth: null
         }
     }
 
@@ -18,35 +19,51 @@ export default class Login extends Component {
         this.setState({
             username: event.target.value
         })
+        fetch('/getusername', {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify({
+                username: event.target.value    ,
+            }),
+        })
+        .then(async res => await res.json())
+        .then(res => {
+               this.setState({
+                    doesUserNameExist: res.response
+                })
+            } 
+        );
     }
 
     setPassword(event) {
         this.setState({
             password: event.target.value
+        });
+        fetch('/login', {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                password: event.target.value    ,
+            }),
         })
+        .then(async res => await res.json())
+        .then(res => {
+               this.setState({
+                    auth: res.auth
+                })
+            } 
+        );
     }
 
     onLogin() {
-        console.log(this.state)
-        // await fetch('/register', {
-        //     method: "POST", // *GET, POST, PUT, DELETE, etc.
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Accept": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         username: this.state.username,
-        //         password: this.state.password,
-        //     }),
-        // })
-        // .then(async res => await res.json())
-        // .then(res => {
-        //        this.setState({
-        //             doesUserNameExist: res.response
-        //         })
-        //     } 
-        // );
-
+        alert('success')
     }
     render() {
         return (
@@ -94,9 +111,14 @@ export default class Login extends Component {
                                     </label>
                                 </div>
                             </div>
-                            <a  className="btn btn-primary btn-block"
-                                href="#"
-                                onClick={this.onLogin}>Login</a>
+                            {
+                                this.state.doesUserNameExist === true
+                                && this.state.auth === true
+                                &&
+                                <a  className="btn btn-primary btn-block"
+                                    href="#"
+                                    onClick={this.onLogin}>Login</a>
+                            }
                         </form>
                         <div className="text-center">
                             <Link className="d-block small mt-3" to="/register">Register an Account</Link>
