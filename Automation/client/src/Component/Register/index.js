@@ -9,8 +9,11 @@ export default class Register extends Component {
             email: '',
             username: '',
             password: '',
+            confirmPassword: null,
             hasUserBeenRegistered: false,
-            doesUserNameExist: false
+            doesUserNameExist: false,
+            isEmailValid: null,
+            isPasswordValid: null,
         };
 
     }
@@ -22,46 +25,70 @@ export default class Register extends Component {
         })
     }
     setEmail(event) {
-        this.setState({
-            email: event.target.value
-        })
+        if (/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$/.test(event.target.value)) {
+
+            this.setState({
+                email: event.target.value,
+                isEmailValid: true
+
+            })
+        } else {
+            this.setState({
+                email: event.target.value,
+                isEmailValid: false
+            })
+        }
 
     }
     setPassword(event) {
-        this.setState({
-            password: event.target.value
-        })
+        // var passwordRegex = event.target.value.replace(/^((?=(.*[A-Z]){1})(?=(.*[0-9]){1})(?=.*[a-zA-Z0-9])).{8,}$/, '');
+        if (/^((?=(.*[A-Z]){1})(?=(.*[0-9]){1})(?=.*[a-zA-Z0-9])).{8,}$/.test(event.target.value)) {
+            this.setState({
+                password: event.target.value,
+                isPasswordValid: true
+            })
+
+        } else {
+            this.setState({
+                password: event.target.value,
+                isPasswordValid: false,
+            })
+        }
 
     }
 
     checkPassword(event) {
         if (this.state.password === event.target.value) {
-            return true
+            this.setState({
+                confirmPassword: true
+            })
         } else {
-            return false
+            this.setState({
+                confirmPassword: false
+            })
         }
     }
 
 
-    async setUsername(event) {
-        await this.setState({
+    setUsername(event) {
+        this.setState({
             username: event.target.value
         });
 
-        await fetch('/getusername', {
+        fetch('/getusername', {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
             body: JSON.stringify({
-                username: this.state.username,
+                username: event.target.value,
             }),
         })
             .then(async res => await res.json())
             .then(res => this.setState({
                 doesUserNameExist: res.response
-            }));
+            }))
 
     }
 
@@ -89,17 +116,14 @@ export default class Register extends Component {
     };
 
     onRegister() {
-        if (this.state.doesUserNameExist) {
-            return;
-        } else {
-            this.callLoginApi()
-                .then(res => this.setState({
-                    hasUserBeenRegistered: res.registration
-                }))
-                .catch(err => console.log(err));
-        }
-
+        this.callLoginApi()
+            .then(res => this.setState({
+                hasUserBeenRegistered: res.registration
+            }))
+            .catch(err => console.log(err));
+        alert('Registration Successful. Now you can login.')
     }
+
 
 
     render() {
@@ -110,6 +134,40 @@ export default class Register extends Component {
                     <div className="card-header">Register an Account</div>
                     <div className="card-body">
                         <form>
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> Your username is your CMS-ID.
+                            </div>
+                            {
+                                this.state.doesUserNameExist === true
+                                &&
+                                <div className="alert alert-danger">
+                                    <strong>Sorry!</strong> This username already exist.
+                                </div>
+                            }
+
+                            {
+                                this.state.isEmailValid === false
+                                &&
+                                <div className="alert alert-danger">
+                                    <strong>Sorry!</strong> Please Enter Correct Email.
+                                </div>
+                            }
+
+                            {
+                                this.state.isPasswordValid === false
+                                &&
+                                <div className="alert alert-danger">
+                                    <strong>Sorry!</strong> Please enter a password of 8-letters. It should have first 1 capital letter, then numbers and characters .
+                                </div>
+                            }
+                            {
+                                this.state.confirmPassword === false
+                                &&
+                                <div className="alert alert-danger">
+                                    <strong>Sorry!</strong> Password does not match.
+                                </div>
+                            }
+
                             <div className="form-group">
                                 <div className="form-label-group">
                                     <input type="text"
@@ -118,6 +176,7 @@ export default class Register extends Component {
                                         placeholder="Enter Your Full Name"
                                         required="required"
                                         autoFocus="autofocus"
+                                        value={this.state.name}
                                         onChange={(event) => this.setName(event)} />
                                     <label htmlFor="firstName">Enter Your Full Name</label>
                                 </div>
@@ -133,6 +192,7 @@ export default class Register extends Component {
                                                 className="form-control"
                                                 placeholder="Email address"
                                                 required="required"
+                                                value={this.state.email}
                                                 onChange={(event) => this.setEmail(event)} />
                                             <label htmlFor="inputEmail">Email address</label>
                                         </div>
@@ -141,8 +201,9 @@ export default class Register extends Component {
                                         <div className="form-label-group">
                                             <input type="text"
                                                 className="form-control"
-                                                placeholder="Username"
+                                                placeholder="Username - Your CMS-ID"
                                                 required="required"
+                                                value={this.state.username}
                                                 onChange={(event) => this.setUsername(event)} />
                                             <label htmlFor="inputEmail">Username</label>
                                         </div>
@@ -158,6 +219,7 @@ export default class Register extends Component {
                                                 className="form-control"
                                                 placeholder="Password"
                                                 required="required"
+                                                value={this.state.password}
                                                 onChange={(event) => this.setPassword(event)} />
                                             <label htmlFor="inputPassword">Password</label>
                                         </div>
@@ -169,6 +231,7 @@ export default class Register extends Component {
                                                 className="form-control"
                                                 placeholder="Confirm password"
                                                 required="required"
+
                                                 onChange={(event) => this.checkPassword(event)} />
                                             <label htmlFor="confirmPassword">Confirm password</label>
                                         </div>
@@ -176,25 +239,27 @@ export default class Register extends Component {
                                 </div>
                             </div>
                             {
-                                this.state.email !== "" && this.state.name !== ""
-                                && this.state.username && this.state.password !== ""
+                                this.state.isEmailValid === true
+                                && this.state.doesUserNameExist === false
+                                && this.state.username !== ''
+                                && this.state.isPasswordValid === true
+                                && this.state.confirmPassword === true
+                                && !this.state.doesUserNameExist
                                 &&
 
-
-                                <Link className="btn btn-primary btn-block"
-                                    to="/"
+                                <Link className="btn btn-primary btn-block" to="/login"
                                     onClick={this.onRegister}
                                     data-toggle={(this.state.doesUserNameExist) ? "modal" : null}
-                                    data-target={(this.state.doesUserNameExist) ? "#exampleModal" : null}>
+                                    data-target={(this.state.doesUserNameExist) ? "#userExistModal" : "newUserModal"}>
 
                                     Register
-                                    </Link>
+                                </Link>
 
                             }
 
                         </form>
                         <div className="text-center">
-                            <Link className="d-block small mt-3" to="/">Already have an account? Click here.</Link>
+                            <Link className="d-block small mt-3" to="/login">Already have an account? Click here.</Link>
                         </div>
                     </div>
                 </div>
@@ -204,7 +269,7 @@ export default class Register extends Component {
                 }
 
                 {/* Modal for existing user */}
-                <div className="modal fade" id="exampleModal" tabIndex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="userExistModal" tabIndex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     {
                         this.state.doesUserNameExist
                         &&
@@ -218,26 +283,6 @@ export default class Register extends Component {
                                 </div>
                                 <div className="modal-body">
                                     Please try again. A user by that username already exist.
-                                    </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    {
-                        !this.state.doesUserNameExist
-                        &&
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Welcome New User</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div className="modal-body">
-                                    You have been successfully registered.
                                     </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
