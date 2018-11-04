@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
+
+// Components
+import Header from './Components/Header';
+import SideBar from './Components/SideBar';
+import Container from './Components/Container';
+import BreadCrumbs from './Components/BreadCrumbs';
+import NavBar from './Components/NavBar';
 
 export default class Login extends Component {
     constructor(props) {
@@ -8,10 +15,24 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
+                <NavBar/>
 
+                <div id="wrapper">
+
+                    <SideBar/>
+                    <div id="content-wrapper">
+
+                        <div className="container-fluid">
+
+                            <BreadCrumbs />
+
+                            <Container />
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
         )
     }
 }
