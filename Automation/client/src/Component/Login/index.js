@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -69,14 +71,14 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <div className="card card-login mx-auto mt-5">
-                    <div className="card-header">Login</div>
+                    <div className="card-header text-center">Login in to Project</div>
                     <div className="card-body">
 
                         <form>
                             {
                                 this.state.doesUserNameExist === false
                                 &&
-                                <div class="alert alert-danger">
+                                <div className="alert alert-danger">
                                     <strong>Sorry!</strong> This username does not exist.
                                 </div>
                             }
@@ -115,9 +117,9 @@ export default class Login extends Component {
                                 this.state.doesUserNameExist === true
                                 && this.state.auth === true
                                 &&
-                                <a  className="btn btn-primary btn-block"
-                                    href="#"
-                                    onClick={this.onLogin}>Login</a>
+                                <Link  className="btn btn-primary btn-block"
+                                    to="/Dashboard"
+                                    onClick={this.onLogin}>Login</Link>
                             }
                         </form>
                         <div className="text-center">

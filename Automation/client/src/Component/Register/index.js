@@ -131,16 +131,16 @@ export default class Register extends Component {
 
             <div className="container">
                 <div className="card card-register mx-auto mt-5">
-                    <div className="card-header">Register an Account</div>
+                    <div className="card-header text-center">Register an Account</div>
                     <div className="card-body">
                         <form>
-                            <div class="alert alert-info">
+                            <div className="alert alert-info text-center ">
                                 <strong>Info!</strong> Your username is your CMS-ID.
                             </div>
                             {
                                 this.state.doesUserNameExist === true
                                 &&
-                                <div className="alert alert-danger">
+                                <div className="alert alert-danger text-center">
                                     <strong>Sorry!</strong> This username already exist.
                                 </div>
                             }
@@ -148,7 +148,7 @@ export default class Register extends Component {
                             {
                                 this.state.isEmailValid === false
                                 &&
-                                <div className="alert alert-danger">
+                                <div className="alert alert-danger text-center">
                                     <strong>Sorry!</strong> Please Enter Correct Email.
                                 </div>
                             }
@@ -156,14 +156,14 @@ export default class Register extends Component {
                             {
                                 this.state.isPasswordValid === false
                                 &&
-                                <div className="alert alert-danger">
+                                <div className="alert alert-danger text-center">
                                     <strong>Sorry!</strong> Please enter a password of 8-letters. It should have first 1 capital letter, then numbers and characters .
                                 </div>
                             }
                             {
                                 this.state.confirmPassword === false
                                 &&
-                                <div className="alert alert-danger">
+                                <div className="alert alert-danger text-center">
                                     <strong>Sorry!</strong> Password does not match.
                                 </div>
                             }
