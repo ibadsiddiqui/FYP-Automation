@@ -6,9 +6,11 @@ export default class Login extends Component {
         this.setUsername = this.setUsername.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.onLogin = this.onLogin.bind(this);
+
         this.state = {
             username: '',
             password: '',
+            doesUserNameExist: null
         }
     }
 
@@ -23,6 +25,7 @@ export default class Login extends Component {
             password: event.target.value
         })
     }
+
     onLogin() {
         console.log(this.state)
         // await fetch('/register', {
@@ -43,6 +46,7 @@ export default class Login extends Component {
         //         })
         //     } 
         // );
+
     }
     render() {
         return (
@@ -50,27 +54,35 @@ export default class Login extends Component {
                 <div className="card card-login mx-auto mt-5">
                     <div className="card-header">Login</div>
                     <div className="card-body">
+
                         <form>
+                            {
+                                this.state.doesUserNameExist === false
+                                &&
+                                <div class="alert alert-danger">
+                                    <strong>Sorry!</strong> This username does not exist.
+                                </div>
+                            }
                             <div className="form-group">
                                 <div className="form-label-group">
-                                    <input  type="text" 
-                                            id="inputEmail" 
-                                            className="form-control" 
-                                            placeholder="Enter Username" 
-                                            required="required" 
-                                            autoFocus="autofocus"
-                                            onChange={(event) => this.setUsername(event)} />
+                                    <input  type="text"
+                                        id="inputEmail"
+                                        className="form-control"
+                                        placeholder="Enter Username"
+                                        required="required"
+                                        autoFocus="autofocus"
+                                        onChange={(event) => this.setUsername(event)} />
                                     <label htmlFor="inputEmail">Enter Username</label>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="form-label-group">
-                                    <input  type="password" 
-                                            id="inputPassword" 
-                                            className="form-control" 
-                                            placeholder="Password" 
-                                            required="required"
-                                            onChange={(event) => this.setPassword(event)}/>
+                                    <input  type="password"
+                                        id="inputPassword"
+                                        className="form-control"
+                                        placeholder="Password"
+                                        required="required"
+                                        onChange={(event) => this.setPassword(event)}/>
                                     <label htmlFor="inputPassword">Password</label>
                                 </div>
                             </div>
@@ -82,8 +94,8 @@ export default class Login extends Component {
                                     </label>
                                 </div>
                             </div>
-                            <a  className="btn btn-primary btn-block" 
-                                href="#" 
+                            <a  className="btn btn-primary btn-block"
+                                href="#"
                                 onClick={this.onLogin}>Login</a>
                         </form>
                         <div className="text-center">
