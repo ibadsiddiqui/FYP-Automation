@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
+
+//Component
 import Login from './Component/Login'
 import Register from './Component/Register'
+import Main from './Component/Main'
 
-import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={Login} />
-        <Route path="/register" component={Register} />
+        <Route  exact path="/" component={Main} />
+        <Route  path="/login" component={Login} />
+        <Route  path="/register" component={Register} />
       </div>
     );
   }
