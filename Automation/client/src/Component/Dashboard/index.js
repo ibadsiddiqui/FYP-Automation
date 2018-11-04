@@ -24,10 +24,8 @@ export default class Login extends Component {
                     <div id="content-wrapper">
 
                         <div className="container-fluid">
-
                             <BreadCrumbs />
-
-                            <Container />
+                            <Route exact route="/" component={Container}/>
                         </div>
 
                     </div>
