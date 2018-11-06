@@ -4,16 +4,17 @@ import { Route } from "react-router-dom";
 //Component
 import Login from './Component/Login'
 import Register from './Component/Register'
-import Main from './Component/Main'
+import EligibilityCheckForm from './Component/EligibilityCheckForm'
 import Dashboard from './Component/Dashboard'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Route  exact path="/" component={Login} />
-        <Route  path="/register" component={Register} />
-        <Route  path="/dashboard" component={Dashboard} />
+        <Route exact path="/" component={EligibilityCheckForm} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/dashboard" component={Dashboard} />
       </div>
     );
   }
