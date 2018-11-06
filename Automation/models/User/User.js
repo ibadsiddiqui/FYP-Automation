@@ -4,7 +4,13 @@ const bcrypt = require('bcryptjs');
 
 // User Schema
 const UserSchema = mongoose.Schema({
+    _id: {
+        type: String
+    },
     name: {
+        type: String
+    },
+    profession: {
         type: String
     },
     username: {
@@ -36,6 +42,11 @@ module.exports.registerUser = function (newUser, callback) {
 module.exports.getUserByUsername = function (username, callback) {
     const query = { username: username }
     User.findOne(query, callback);
+}
+
+module.exports.getUserByProfession = function (profession, callback) {
+    const query = { profession: profession };
+    User.find(query, callback);
 }
 
 module.exports.getUserById = function (id, callback) {
