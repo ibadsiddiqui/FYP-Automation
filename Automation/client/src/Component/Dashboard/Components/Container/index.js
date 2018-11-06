@@ -45,7 +45,7 @@ export default class Container extends Component {
                             <div className="card-body-icon">
                                 <i className="fas fa-fw fa-search"></i>
                             </div>
-                            <div className="mr-5" style={{ "font-size": 22 + "px" }}>Titles for Project</div>
+                            <div className="mr-5" style={{ "font-size": 22 + "px" }}>Proposed Titles From University</div>
                         </div>
                         <a className="card-footer text-white clearfix small z-1" href="TitlesForProject.html">
                             <span className="float-left" style={{ "font-size": 18 + "px" }}>View Details</span>

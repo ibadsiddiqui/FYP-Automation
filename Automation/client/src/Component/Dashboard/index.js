@@ -8,7 +8,7 @@ import Container from './Components/Container';
 import BreadCrumbs from './Components/BreadCrumbs';
 import NavBar from './Components/NavBar';
 
-export default class Login extends Component {
+export default class Dashboard extends Component {
     constructor(props) {
         super(props);
     }
