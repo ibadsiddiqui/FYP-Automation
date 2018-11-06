@@ -9,6 +9,8 @@ export default class Register extends Component {
             email: '',
             username: '',
             password: '',
+            profession: '',
+            professionValid: null,
             confirmPassword: null,
             hasUserBeenRegistered: false,
             doesUserNameExist: false,
@@ -18,13 +20,37 @@ export default class Register extends Component {
 
     }
 
+    async setProfession(event) {
+        await this.setState({
+            profession: event.target.value
+        })
+        if (this.state.profession === "student" || this.state.profession === "Student"
+            || this.state.profession === "Teacher" || this.state.profession === "teacher") {
+            this.setState({
+                professionValid: true
+            })
+            console.log(this.state)
+        } else if(this.state.profession.length === 0){
+            this.setState({
+                profession:null
+            })
+        }
+        else {
+            this.setState({
+                professionValid: false
+            })
+            console.log(this.state)
+        }
+    }
 
     setName(event) {
         this.setState({
             name: event.target.value
         })
     }
+
     setEmail(event) {
+
         if (/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$/.test(event.target.value)) {
 
             this.setState({
@@ -105,6 +131,7 @@ export default class Register extends Component {
                 email: this.state.email,
                 username: this.state.username,
                 password: this.state.password,
+                profession: this.state.profession
             }),
         });
 
@@ -124,6 +151,11 @@ export default class Register extends Component {
         alert('Registration Successful. Now you can login.')
     }
 
+    componentWillUnmount(){
+        this.setState({
+            ... null
+        })
+    }
 
 
     render() {
@@ -144,6 +176,16 @@ export default class Register extends Component {
                                     <strong>Sorry!</strong> This username already exist.
                                 </div>
                             }
+
+                            {
+                                this.state.professionValid === false
+
+                                &&
+                                <div className="alert alert-danger text-center">
+                                    <strong>Sorry!</strong>Profession can only be between Teacher and Student
+                                </div>
+                            }
+
 
                             {
                                 this.state.isEmailValid === false
@@ -179,6 +221,19 @@ export default class Register extends Component {
                                         value={this.state.name}
                                         onChange={(event) => this.setName(event)} />
                                     <label htmlFor="firstName">Enter Your Full Name</label>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="form-label-group">
+                                    <input type="text"
+                                        id="profession"
+                                        className="form-control"
+                                        placeholder="Enter Your Profession"
+                                        required="required"
+                                        autoFocus="autofocus"
+                                        value={this.state.profession}
+                                        onChange={(event) => this.setProfession(event)} />
+                                    <label htmlFor="profession">Enter Your Profession | Student | Teacher</label>
                                 </div>
                             </div>
                             <div className="form-group">
