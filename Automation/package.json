@@ -1,12 +1,12 @@
 {
-  "name": "example-create-react-app-express",
+  "name": "fyp-automation",
   "version": "1.0.0",
   "description": "Backend for FYP Automation",
   "author": {
     "name": "Ibad Siddiqui",
-    "email": "esausilva85@gmail.com"
+    "email": "ibadsiddiqui01@gmail.com"
   },
-  "license": "MIT",
+  "license": "",
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
@@ -22,13 +22,6 @@
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/esausilva/example-create-react-app-express.git"
-  },
-  "bugs": {
-    "url": "https://github.com/esausilva/example-create-react-app-express/issues"
   },
   "keywords": [
     "node",
