@@ -1,3 +1,5 @@
+var jwt = require('jsonwebtoken');
+var config = require('./../../Secret')
 const User = require('./../../../models/User/User')
 
 
@@ -5,29 +7,23 @@ module.exports = (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
 
-
-    var isRegistered;
     User.getUserByUsername(username, (err, user) => {
         if (err) throw err;
         if (user !== null) {
-            isRegistered = true
-        } else {
-            isRegistered = false;
-        }
-
-        console.log(isRegistered)
-
-        if (isRegistered == true) {
-
             User.comparePassword(password, user.password, (err, isMatch) => {
                 if (err) throw err;
                 if (isMatch) {
-                    response.send({
-                        message: "Password Matched",
-                        auth: true
-                    })
+                    console.log('password matched')
+                    var token = jwt.sign({ id: user._id }, config.secret, {
+                        expiresIn: 86400 // expires in 24 hours
+                    });
+
+                    response.status(200).send({
+                        auth: true,
+                        token: token,
+                    });
                 } else {
-                    response.send({
+                    response.status(500).send({
                         message: "Wrong Password",
                         auth: false,
                     })
@@ -40,5 +36,4 @@ module.exports = (request, response) => {
             })
         }
     });
-
 }

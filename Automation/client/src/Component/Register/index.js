@@ -181,7 +181,7 @@ export default class Register extends Component {
                                 this.state.professionValid === false
 
                                 &&
-                                <div className="alert alert-danger text-center">
+                                  <div className="alert alert-danger text-center">
                                     <strong>Sorry!</strong>Profession can only be between Teacher and Student
                                 </div>
                             }
@@ -318,7 +318,7 @@ export default class Register extends Component {
                         </div>
                     </div>
                 </div>
-
+    
                 {
 
                 }
