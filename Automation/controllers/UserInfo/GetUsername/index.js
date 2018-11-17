@@ -1,18 +1,21 @@
 const User = require('./../../../models/User/User')
+const decodedJWT = require('./../../../Helpers/JWTDecoder')
 
 module.exports = (request, response) => {
-    const username = request.body.username;
-    console.log(request.body.username, request.body.password )
+    const username = decodedJWT(request.headers.authorization) 
 
+    if (username){
+        // const username = request.body.username;
+        User.getUserByUsername( username, (err, user) => {
+            if (err) throw err;
+            if (user !== null) {
+                response.status(200).send({ response: true , user})
     
-    User.getUserByUsername(username, (err, user) => {
-        if (err) throw err;
-        if (user !== null) {
-            isRegistered = true
-        } else {
-            isRegistered = false;
-        }
-        response.send({ response: isRegistered })
+            } else {
+                response.status(404).send({ response: false })
+            }
+    
+        })
 
-    })
+    }
 }
