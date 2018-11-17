@@ -10,7 +10,6 @@ module.exports = async (request, response) => {
     const password = request.body.password;
     const profession = request.body.profession;
 
-    var registered; // flag
 
     await User.getUserByUsername(username, (err, user) => {
         if (err) throw err;
