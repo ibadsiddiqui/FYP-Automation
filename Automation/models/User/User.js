@@ -21,6 +21,10 @@ const UserSchema = mongoose.Schema({
     },
     password: {
         type: String
+    },
+    createdAt:{
+        type: String,
+        default: new Date().toLocaleString()
     }
 });
 
@@ -41,7 +45,7 @@ module.exports.registerUser = function (newUser, callback) {
 
 module.exports.getUserByUsername = function (username, callback) {
     const query = { username: username }
-    User.findOne(query, callback);
+    User.findOne(query, {password: 0},callback);
 }
 
 module.exports.getUserByProfession = function (profession, callback) {
@@ -50,7 +54,7 @@ module.exports.getUserByProfession = function (profession, callback) {
 }
 
 module.exports.getUserById = function (id, callback) {
-    User.findById(id, callback);
+    User.findById(id,{ password: 0 }, callback);
 }
 
 module.exports.comparePassword = function (candidatePassword, hash, callback) {
