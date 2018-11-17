@@ -22,10 +22,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // registration process
 
-
 app.post('/login', LoginAuthController);
 app.post('/register', RegisterAuthController);
-app.post('/getusername', GetUsernameAuthController)
+
+// getting info using token
+app.get('/getusername', GetUsernameAuthController)
+app.get('/getuserinfo', GetUsernameAuthController)
 
 
 
