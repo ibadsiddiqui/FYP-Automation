@@ -9,7 +9,7 @@ const app = express();
 const LoginAuthController = require('./controllers/Auth/Login')
 const RegisterAuthController = require('./controllers/Auth/Register')
 const GetUsernameAuthController = require('./controllers/UserInfo/GetUsername')
-
+const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
 
 mongoose.connect('mongodb://localhost/Automation');
 const port = process.env.PORT || 4000;
@@ -29,6 +29,7 @@ app.post('/register', RegisterAuthController);
 app.get('/getusername', GetUsernameAuthController)
 app.get('/getuserinfo', GetUsernameAuthController)
 
+app.post('/updateuserprofile', UpdateUserProfileController)
 
 
 if (process.env.NODE_ENV === 'production') {
