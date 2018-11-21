@@ -120,29 +120,6 @@ class Register extends Component {
 
   }
 
-  // async callLoginApi() {
-
-  //   const response = await fetch('/register', {
-  //     method: "POST", // *GET, POST, PUT, DELETE, etc.
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       name: this.state.name,
-  //       email: this.state.email,
-  //       username: this.state.username,
-  //       password: this.state.password,
-  //       profession: this.state.profession
-  //     }),
-  //   });
-
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) throw Error(body.message);
-
-  //   return body;
-  // };
 
   onRegister() {
     fetch('/register', {
