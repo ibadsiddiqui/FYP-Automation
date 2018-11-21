@@ -14,12 +14,9 @@ import {
 
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
-// const Loading = () => <div>Loading...</div>
-
+import "./styles.css"
 const brandPrimary = getStyle('--primary')
-const brandSuccess = getStyle('--success')
 const brandInfo = getStyle('--info')
-const brandDanger = getStyle('--danger')
 
 // Card Chart 1
 const cardChartData1 = {
@@ -380,7 +377,7 @@ class Dashboard extends Component {
 
               <Card className="text-white bg-info">
                 <CardBody className="pb-0">
-                  <div>Meeting Minutes form and remarks</div>
+                  <div>Meeting Minutes </div>
                 </CardBody>
                 <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                   <Line data={cardChartData2} options={cardChartOpts2} height={70} />
@@ -390,39 +387,49 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-primary">
-              <CardBody className="pb-0">
+            <a href="#">
 
-                <div>Available Forms for FYP (i.e. Proposal or Evaluation Form)</div>
-              </CardBody>
-              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line data={cardChartData1} options={cardChartOpts1} height={70} />
-              </div>
-            </Card>
+              <Card className="text-white bg-primary">
+                <CardBody className="pb-0">
+
+                  <div>Available Forms for FYP</div>
+                </CardBody>
+                <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                  <Line data={cardChartData1} options={cardChartOpts1} height={70} />
+                </div>
+              </Card>
+            </a>
+
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-warning">
-              <CardBody className="pb-0">
+            <a href="#">
 
-                <div>Projects proposed by university</div>
-              </CardBody>
-              <div className="chart-wrapper" style={{ height: '70px' }}>
-                <Line data={cardChartData3} options={cardChartOpts3} height={70} />
-              </div>
-            </Card>
+              <Card className="text-white bg-warning">
+                <CardBody className="pb-0">
+
+                  <div>Projects given by University</div>
+                </CardBody>
+                <div className="chart-wrapper" style={{ height: '70px' }}>
+                  <Line data={cardChartData3} options={cardChartOpts3} height={70} />
+                </div>
+              </Card>
+            </a>
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-danger">
-              <CardBody className="pb-0">
+            <a href="#">
 
-                <div>List of Approved Projects by University</div>
-              </CardBody>
-              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
-              </div>
-            </Card>
+              <Card className="text-white bg-danger">
+                <CardBody className="pb-0">
+
+                  <div>Approved Projects</div>
+                </CardBody>
+                <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                  <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
+                </div>
+              </Card>
+            </a>
           </Col>
         </Row>
         <Row>
