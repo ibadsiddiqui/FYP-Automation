@@ -52,7 +52,8 @@ class DefaultLayout extends React.PureComponent {
       .then(res => {
         if (res.response === true) {
           this.setState({
-            user: res.user
+            user: res.user,
+            status: res.status
           })
         }
       })
@@ -89,7 +90,7 @@ class DefaultLayout extends React.PureComponent {
                     {routes.map((route, idx) => {
                       return route.component ? (
                         <Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
-                          <route.component {...props} />
+                          <route.component {...props} userDetail={this.state.user}/>
                         )} />)
                         : (null);
                     },
