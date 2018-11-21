@@ -3,17 +3,20 @@ import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLin
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 
+import ToolTip from './../../components/ToolTip'
 import { AppAsideToggler, AppHeaderDropdown, AppSidebarToggler } from '@coreui/react';
 
 const propTypes = {
   children: PropTypes.node,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  username: String,
+};
 
 class DefaultHeader extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.logOut = this.logOut.bind(this)
     this.state = {
       logout: false
@@ -44,7 +47,9 @@ class DefaultHeader extends Component {
             <AppHeaderDropdown direction="down">
 
               <DropdownToggle nav>
-                <img src={'assets/img/avatars/user.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                <img src={'assets/img/avatars/user.png'} className="img-avatar" alt="admin@bootstrapmaster.com"  id="user"/>
+                <ToolTip position="bottom" text={this.props.username} target="#user"/>
+
               </DropdownToggle>
 
               <DropdownMenu right style={{ right: 'auto' }}>
