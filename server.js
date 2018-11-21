@@ -8,7 +8,7 @@ const app = express();
 
 const LoginAuthController = require('./controllers/Auth/Login')
 const RegisterAuthController = require('./controllers/Auth/Register')
-const GetUsernameAuthController = require('./controllers/UserInfo/GetUsername')
+const GetUsernameAuthController = require('./controllers/UserInfo/GetDetails')
 const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
 
 mongoose.connect('mongodb://localhost/Automation');

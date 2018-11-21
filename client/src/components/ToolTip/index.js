@@ -19,7 +19,7 @@ export default class ToolTip extends React.Component {
 
   render() {
     return (
-        <Tooltip placement="left-end" isOpen={this.state.tooltipOpen} target={this.props.target} toggle={this.toggle}>
+        <Tooltip placement={this.props.position} isOpen={this.state.tooltipOpen} target={this.props.target} toggle={this.toggle}>
           {this.props.text}
         </Tooltip>
     );
