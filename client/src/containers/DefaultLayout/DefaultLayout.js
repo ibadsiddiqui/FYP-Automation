@@ -23,37 +23,56 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 
 class DefaultLayout extends React.PureComponent {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      token: null
+      token: null,
+      user: []
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     var token = localStorage.getItem('token')
-    if(token !== null && token !== "null") {
+    if (token !== null && token !== "null") {
       this.setState({
         token: token
       });
     }
   }
-
+  async componentDidMount() {
+    await fetch('/getuserinfo', {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'Authorization': this.state.token
+      },
+    })
+      .then( res => res.json())
+      .then(res => {
+        if (res.response === true) {
+          this.setState({
+            user: res.user
+          })
+        }
+      })
+  }
 
   render() {
+
     return (
       <div className="app">
         {
           this.state.token === null
-            &&
-            <Redirect to="login" from="/"/>
+          &&
+          <Redirect to="login" from="/" />
         }
         {
           this.state.token !== null
           &&
           <div>
             <AppHeader fixed>
-              <DefaultHeader />
+              <DefaultHeader username={this.state.user.name}/>
             </AppHeader>
             <div className="app-body">
               <AppSidebar fixed display="lg">
@@ -73,19 +92,19 @@ class DefaultLayout extends React.PureComponent {
                           <route.component {...props} />
                         )} />)
                         : (null);
-                      },
+                    },
                     )}
                     <Redirect from="/" to="/dashboard" />
                   </Switch>
                 </Container>
               </main>
               <AppAside fixed>
-                  <DefaultAside />
+                <DefaultAside />
               </AppAside>
             </div>
             <AppFooter>
               <DefaultFooter />
-            </AppFooter> 
+            </AppFooter>
           </div>
         }
       </div>
