@@ -41,9 +41,7 @@ class DefaultHeader extends Component {
 
           <Nav className="ml-auto" navbar>
 
-            <NavItem className="d-md-down-none">
-              <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">1</Badge></NavLink>
-            </NavItem>
+
             <AppHeaderDropdown direction="down">
 
               <DropdownToggle nav>
