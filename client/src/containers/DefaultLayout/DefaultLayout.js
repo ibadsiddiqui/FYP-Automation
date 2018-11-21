@@ -25,16 +25,14 @@ import DefaultHeader from './DefaultHeader';
 class DefaultLayout extends React.PureComponent {
   constructor(){
     super();
-    
     this.state = {
       token: null
     }
   }
+
   componentWillMount(){
-
-
     var token = localStorage.getItem('token')
-    if(token !== null) {
+    if(token !== null && token !== "null") {
       this.setState({
         token: token
       });
