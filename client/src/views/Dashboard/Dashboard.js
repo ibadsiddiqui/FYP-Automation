@@ -10,7 +10,9 @@ import {
   Progress,
   Row,
   Table,
-} from 'reactstrap';
+} from 'reactstrap';  
+
+import {Link} from 'react-router-dom'
 
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
@@ -213,42 +215,6 @@ const cardChartOpts4 = {
   },
 };
 
-// Social Box Chart
-const socialBoxData = [
-  { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
-  { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
-  { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
-  { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
-];
-
-// sparkline charts
-const sparkLineChartData = [
-  {
-    data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'New Clients',
-  },
-  {
-    data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Recurring Clients',
-  },
-  {
-    data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'Pageviews',
-  },
-  {
-    data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Organic',
-  },
-  {
-    data: [78, 81, 80, 45, 34, 12, 40],
-    label: 'CTR',
-  },
-  {
-    data: [1, 13, 9, 17, 34, 41, 38],
-    label: 'Bounce Rate',
-  },
-];
-
 // Main Chart
 
 //Random Numbers
@@ -355,6 +321,7 @@ class Dashboard extends Component {
     //     })
     //   });
   }
+
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
@@ -387,7 +354,7 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <a href="#">
+            <Link to="/Templates">
 
               <Card className="text-white bg-primary">
                 <CardBody className="pb-0">
@@ -398,7 +365,7 @@ class Dashboard extends Component {
                   <Line data={cardChartData1} options={cardChartOpts1} height={70} />
                 </div>
               </Card>
-            </a>
+            </Link>
 
           </Col>
 
@@ -418,7 +385,7 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <a href="#">
+            <Link to="/Projects">
 
               <Card className="text-white bg-danger">
                 <CardBody className="pb-0">
@@ -429,7 +396,7 @@ class Dashboard extends Component {
                   <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
                 </div>
               </Card>
-            </a>
+            </Link>
           </Col>
         </Row>
         <Row>
@@ -478,7 +445,7 @@ class Dashboard extends Component {
                         </div>
                       </td>
                       <td>
-                        <div>Yiorgos Avraamu</div>
+                        <div>{this.props.userDetail.name}</div>
                         <div className="small text-muted">
                           <span>New</span> | Registered: Jan 1, 2015
                       </div>

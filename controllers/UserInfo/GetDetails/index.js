@@ -14,7 +14,6 @@ module.exports = (request, response) => {
             } else {
                 response.status(404).send({ response: false })
             }
-    
         })
 
     }
