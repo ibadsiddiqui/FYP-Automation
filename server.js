@@ -1,6 +1,9 @@
+const path = require('path')
+
 const mongoose = require('mongoose');
+const expressEdge = require('express-edge');
+
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser')
 
 const app = express();
@@ -14,13 +17,30 @@ const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserPr
 mongoose.connect('mongodb://localhost/Automation');
 const port = process.env.PORT || 4000;
 
+// template engine for admin and directory 
+app.use(express.static('public'))
+app.use(expressEdge);
 
-
-
+// allow to accept and transfer data in json
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// setting views directory for Admin pages
+app.set('views', `${__dirname}/views`);
+
 // registration process
+app.get('/', (request, response) => {
+  console.log('inside /')
+
+  response.render('index')
+})
+
+app.get('/calender', (request, response) => {
+  console.log('inside asd')
+
+  response.render('calender')
+})
+
 
 app.post('/login', LoginAuthController);
 app.post('/register', RegisterAuthController);
