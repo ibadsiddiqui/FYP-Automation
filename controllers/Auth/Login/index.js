@@ -13,7 +13,6 @@ module.exports = (request, response) => {
             User.comparePassword(password, user.password, (err, isMatch) => {
                 if (err) throw err;
                 if (isMatch) {
-                    console.log('password matched')
                     var token = jwt.sign({ id: user._id }, config.secret, {
                         expiresIn: 86400 // expires in 24 hours
                     });

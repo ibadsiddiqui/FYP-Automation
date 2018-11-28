@@ -7,12 +7,19 @@ const express = require('express');
 const bodyParser = require('body-parser')
 
 const app = express();
+const Project = require('./models/Projects/Projects')
 
 
 const LoginAuthController = require('./controllers/Auth/Login')
 const RegisterAuthController = require('./controllers/Auth/Register')
 const GetUsernameAuthController = require('./controllers/UserInfo/GetDetails')
 const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
+
+
+const adminManageEligibilities = require('./controllers/Admin/ManageEligibilities')
+const adminManageUsers = require('./controllers/Admin/ManageUsers');
+const adminManageProjects = require('./controllers/Admin/ManageProjects')
+
 
 mongoose.connect('mongodb://localhost/Automation');
 const port = process.env.PORT || 4000;
@@ -28,20 +35,45 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // setting views directory for Admin pages
 app.set('views', `${__dirname}/views`);
 
-// registration process
+// ////////////////////////////////////////admin works
+
 app.get('/', (request, response) => {
-  console.log('inside /')
 
   response.render('index')
 })
 
-app.get('/calender', (request, response) => {
-  console.log('inside asd')
+app.get('/manageusers', adminManageUsers)
 
-  response.render('calender')
+app.get('/fyplist', (request, response) => {
+  response.render('fyplist')
+})
+
+app.get('/manageeligibilities', adminManageEligibilities)
+app.get('/manageprojects', adminManageProjects)
+app.post('/insertProject', async (req, res) => {
+  const name = req.body.pname;
+  const groupid = req.body.groupid;
+  const status = req.body.status;
+  const abstract = req.body.abstract;
+  const createdAt = new Date().toLocaleString();
+  const completedAt = req.body.completedAt;
+  const newProject = new Project({
+    project_name: name,
+    group_id: groupid,
+    status: status,
+    abstract: abstract,
+    createdAt: createdAt,
+    completedAt: completedAt
+  })
+  Project.create(newProject, (err, project) => {
+    if (err) throw err;
+    console.log('New Project', project)
+  })
 })
 
 
+
+////////////////////////////////////////////////////////
 app.post('/login', LoginAuthController);
 app.post('/register', RegisterAuthController);
 
