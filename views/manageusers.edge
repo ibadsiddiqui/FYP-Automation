@@ -1,0 +1,55 @@
+{{--  below is the folder.filename   --}}
+@layout('layouts.app')  
+
+{{--  section to be rendered  --}}
+@section('content')
+
+  <!-- Main Content -->
+  <div class="row">
+      <div class="col-md-8">
+        <div class="content-box-large">
+          <div class="panel-heading">
+            <div class="panel-title">Manage All Users</div>
+
+            <div class="panel-options">
+              <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+              <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+            </div>
+          </div>
+
+
+
+          <div class="panel-body">
+            <table class="table">
+              <tr>
+                <th>CMS</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Profession</th>
+                <th>Eligiblity Status</th>
+                <th>Block/Unblock</th>
+              </tr>
+
+
+              @each(user in users)
+              <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.profession}}</td>
+                <td>{{user.createdAt}}</td>
+                <td><label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label> 
+                </td>
+              </tr>
+                @endeach
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+@endsection 
