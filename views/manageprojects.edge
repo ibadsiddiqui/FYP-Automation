@@ -1,0 +1,71 @@
+{{--  below is the folder.filename   --}}
+@layout('layouts.app')  
+
+{{--  section to be rendered  --}}
+@section('content')
+
+  <!-- Main Content -->
+<div class="row">
+    <div class="col-md-8">
+        <div class="content-box-large">
+            <div class="panel-heading">
+                <div class="panel-title">Manage Projects</div>
+
+                <div class="panel-options">
+                <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Groud ID</th>
+                        <th>Status</th>
+                        <th>Abstract</th>
+                        <th>Created At</th>
+                        <th>Completed At</th>
+                    </tr>
+
+
+                    @each(project in projects)
+                    <tr>
+                        <td>{{project.project_name}}</td>
+                        <td>{{project.group_id}}</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td type="button"  data-toggle="modal" data-target="#exampleModal">
+                                <a>Abstract</a>
+                        </td>
+                        <td>{{project.createdAt}}</td>
+                        <td>{{project.completedAt}}</td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLabel">Abstract of Project</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{project.abstract}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endeach
+                </table>                 
+            </div>
+        </div>
+    </div>
+  </div>
+
+@endsection 
