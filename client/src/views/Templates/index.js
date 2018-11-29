@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, ListGroup, ListGroupItem, Row, TabContent, TabPane } from 'reactstrap';
-
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    ListGroup,
+    ListGroupItem,
+    Row,
+    TabContent,
+    TabPane,
+} from 'reactstrap';
+import ProposalForm from './ProposalForm'
 import ToolTip from './../../components/ToolTip'
 
 class Templates extends Component {
@@ -54,12 +64,12 @@ class Templates extends Component {
                                                 <p id="checklist">
                                                     <a href={'0-CS-FYP-Checklist-00.doc'}>1 - CS-FYP Checklist</a>
                                                 </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#checklist"/>
+                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#checklist" />
 
                                                 <p id="guidline">
                                                     <a href={'Guidelines-FYP-CS.pptx'}>2 - Guidelines for FYP</a>
                                                 </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#guidline"/>
+                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#guidline" />
 
                                             </TabPane>
                                             <TabPane tabId={1}>
@@ -73,20 +83,29 @@ class Templates extends Component {
                                                 <p>
                                                     <em><strong>FYP Proposal Guidelines PPT</strong></em> is provided to students so they can resolve their queries with the proposal form, deliverables and could know the rules and regulations.
                                                 </p>
-                                                <p id="proposal-guideline">
-                                                    <a href={'3-FYP-Propsl-Guidline.pptx'}>1 - FYP Proposal Guidlines</a>
-                                                </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-guideline"/>
+                                                <Row>
+                                                <Col>
+                                                    <p id="proposal-guideline">
+                                                        <a href={'3-FYP-Propsl-Guidline.pptx'}>1 - Proposal Guidlines</a>
+                                                    </p>
+                                                    <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-guideline" />
+                                                </Col>
+                                                <Col>
+                                                    <p id="proposal-template">
+                                                        <a href={'1-FYP-Propsl-Tmpl-03.docx'}>2 - Proposal Template</a>
+                                                    </p>
+                                                    <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-template" />
+                                                </Col>
+                                                <Col>
+                                                    <p id="proposal-ppt">
+                                                        <a href={'2-FYP-Propsl-PPT-04.pptx'}>3 - Proposal Presentation Template </a>
+                                                    </p>
+                                                    <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-ppt" />
+                                                </Col>
+                                                </Row>
 
-                                                <p id="proposal-template">
-                                                    <a href={'1-FYP-Propsl-Tmpl-03.docx'}>2 - FYP Proposal Template</a>
-                                                </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-template"/>
+                                                <ProposalForm />
 
-                                                <p id="proposal-ppt">
-                                                    <a href={'2-FYP-Propsl-PPT-04.pptx'}>3 - FYP Proposal Presentation Template </a>
-                                                </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-ppt"/>
 
                                             </TabPane>
                                             <TabPane tabId={2}>
@@ -99,7 +118,7 @@ class Templates extends Component {
                                                 <p id="progress-guidline">
                                                     <a href={'6-1st-evaluation-Progress-Evaluation-Guidline.pptx'}>1st evaluation Progress Evaluation Guidline</a>
                                                 </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#progress-guidline"/>
+                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#progress-guidline" />
 
                                             </TabPane>
                                             <TabPane tabId={3}>
@@ -108,12 +127,12 @@ class Templates extends Component {
                                                 <p id="final-report">
                                                     <a href={'7-FYP-Fnl-Rpt-Fmt-09.docx'}>1 - FYP Final Report Template</a>
                                                 </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#final-report"/>
+                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#final-report" />
 
                                                 <p id="final-ppt">
                                                     <a href={'8-FYP-Fnl-Rpt-PPT-10.pptx'}>2 - FYP Final Report Presentation Template</a>
                                                 </p>
-                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#final-ppt"/>
+                                                <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#final-ppt" />
 
                                             </TabPane>
                                         </TabContent>
