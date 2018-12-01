@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/Automation');
-const bcrypt = require('bcryptjs');
 
 // Project Schema
 const ProjectSchema = mongoose.Schema({
