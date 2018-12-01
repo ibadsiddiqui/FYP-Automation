@@ -23,45 +23,56 @@ app.set('views', `${__dirname}/views`);
 // ////////////////////////////////////////admin works
 
 
-
-const LoginAuthController = require('./controllers/Auth/Login')
-const RegisterAuthController = require('./controllers/Auth/Register')
-const GetUsernameAuthController = require('./controllers/UserInfo/GetDetails')
-const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
-const createNewProjectController = require('./controllers/Project/createNewProjectControllers')
-
 const adminDashboard = require('./controllers/Admin/Dashboard')
 const adminManageEligibilities = require('./controllers/Admin/ManageEligibilities')
 const adminManageUsers = require('./controllers/Admin/ManageUsers');
 const adminManageProjects = require('./controllers/Admin/ManageProjects')
 const adminManageFYPList = require('./controllers/Admin/adminManageFYPList')
 
-
-
 app.get('/',  adminDashboard)
-
 app.get('/manageusers', adminManageUsers)
-
 app.get('/fyplist', adminManageFYPList)
-
 app.get('/manageeligibilities', adminManageEligibilities)
 app.get('/manageprojects', adminManageProjects)
-app.post('/insertProject', createNewProjectController)
-
-
-
 ////////////////////////////////////////////////////////
+
+
+
+// authentication work
+const LoginAuthController = require('./controllers/Auth/Login')
+const RegisterAuthController = require('./controllers/Auth/Register')
+
 app.post('/login', LoginAuthController);
 app.post('/register', RegisterAuthController);
+////////////////////////////////////////////////
+
 
 // getting info using token
+const GetUsernameAuthController = require('./controllers/UserInfo/GetDetails')
 app.get('/getusername', GetUsernameAuthController)
 app.get('/getuserinfo', GetUsernameAuthController)
+///////////////////////////////////////////////////////
 
+
+// user controllers for updating profile
+
+const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
 app.post('/updateuserprofile', UpdateUserProfileController)
+/////////////////////////////////////////////////////
+
+// project request controllers
+const createNewProjectController = require('./controllers/Project/createNewProjectControllers')
+const submitProjectProposal = require('./controllers/Project/submitProjectProposal')
+
+app.post('/insertProject', createNewProjectController)
+app.post('/submitProjectProposal', submitProjectProposal)
 
 
+
+
+// process for development
 if (process.env.NODE_ENV === 'production') {
+
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
 
