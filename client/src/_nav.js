@@ -25,11 +25,11 @@ export default {
       url: '/Templates',
       icon: 'icon-layers',
     },
-    {
-      name: 'Base',
-      url: '/base',
-      icon: 'icon-puzzle',
-      children: [
+    // {
+    //   name: 'Base',
+    //   url: '/base',
+    //   icon: 'icon-puzzle',
+    //   children: [
     //     {
     //       name: 'Breadcrumbs',
     //       url: '/base/breadcrumbs',
@@ -55,11 +55,11 @@ export default {
     //       url: '/base/dropdowns',
     //       icon: 'icon-puzzle',
     //     },
-        {
-          name: 'Forms',
-          url: '/base/forms',
-          icon: 'icon-puzzle',
-        },
+        // {
+        //   name: 'Forms',
+        //   url: '/base/forms',
+        //   icon: 'icon-puzzle',
+        // },
     //     {
     //       name: 'Jumbotrons',
     //       url: '/base/jumbotrons',
@@ -110,8 +110,8 @@ export default {
     //       url: '/base/tooltips',
     //       icon: 'icon-puzzle',
     //     },
-      ],
-    },
+      // ],
+    // },
     // {
     //   name: 'Buttons',
     //   url: '/buttons',
@@ -144,41 +144,41 @@ export default {
     //   url: '/charts',
     //   icon: 'icon-pie-chart',
     // },
-    {
-      name: 'Icons',
-      url: '/icons',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'CoreUI Icons',
-          url: '/icons/coreui-icons',
-          icon: 'icon-star',
-          badge: {
-            variant: 'info',
-            text: 'NEW',
-          },
-        },
-        {
-          name: 'Flags',
-          url: '/icons/flags',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Font Awesome',
-          url: '/icons/font-awesome',
-          icon: 'icon-star',
-          badge: {
-            variant: 'secondary',
-            text: '4.7',
-          },
-        },
-        {
-          name: 'Simple Line Icons',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star',
-        },
-      ],
-    },
+    // {
+    //   name: 'Icons',
+    //   url: '/icons',
+    //   icon: 'icon-star',
+    //   children: [
+    //     {
+    //       name: 'CoreUI Icons',
+    //       url: '/icons/coreui-icons',
+    //       icon: 'icon-star',
+    //       badge: {
+    //         variant: 'info',
+    //         text: 'NEW',
+    //       },
+    //     },
+    //     {
+    //       name: 'Flags',
+    //       url: '/icons/flags',
+    //       icon: 'icon-star',
+    //     },
+    //     {
+    //       name: 'Font Awesome',
+    //       url: '/icons/font-awesome',
+    //       icon: 'icon-star',
+    //       badge: {
+    //         variant: 'secondary',
+    //         text: '4.7',
+    //       },
+    //     },
+    //     {
+    //       name: 'Simple Line Icons',
+    //       url: '/icons/simple-line-icons',
+    //       icon: 'icon-star',
+    //     },
+    //   ],
+    // },
     // {
     //   name: 'Notifications',
     //   url: '/notifications',
