@@ -32,6 +32,33 @@ class Templates extends Component {
         }
     }
 
+
+    uploadProgressReport(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file)
+        setTimeout(() => {
+            if (reader.readyState === 2) {
+                this.setState({
+                    ProgressReport: reader.result
+                });
+            }
+        }, 500)
+    }
+    uploadFinalReport(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file)
+        setTimeout(() => {
+            if (reader.readyState === 2) {
+                this.setState({
+                    raciChart: reader.result
+                });
+                console.log(this.state)
+            }
+        }, 500)
+    }
+
     render() {
         return (
             <div className="animated fadeIn">
@@ -120,6 +147,13 @@ class Templates extends Component {
                                                 </p>
                                                 <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#progress-guidline" />
 
+                                                <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                                                    <span className="label-input100">Upload Status or Progress Report Document:</span>
+                                                    <div className="col-xs-3">
+                                                        <input type="file" accept=".doc,.docx,application/msword,.pdf" name="profilepic" onChange={(file) => this.uploadProgressReport(file)} />
+                                                    </div>
+                                                </div>
+
                                             </TabPane>
                                             <TabPane tabId={3}>
                                                 <p><em><strong>FYP Final Report Format</strong></em> is provided to students so they can submit their complete detailed reports of their FYP with the project submission.</p>
@@ -133,6 +167,13 @@ class Templates extends Component {
                                                     <a href={'8-FYP-Fnl-Rpt-PPT-10.pptx'}>2 - FYP Final Report Presentation Template</a>
                                                 </p>
                                                 <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#final-ppt" />
+
+                                                <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                                                    <span className="label-input100">Upload Final Project Report Document:</span>
+                                                    <div className="col-xs-3">
+                                                        <input type="file" accept=".doc,.docx,application/msword,.pdf" name="FinalReport" onChange={(file) => this.uploadFinalReport(file)} />
+                                                    </div>
+                                                </div>
 
                                             </TabPane>
                                         </TabContent>
