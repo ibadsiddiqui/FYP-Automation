@@ -21,7 +21,7 @@ export default {
       icon: 'icon-list',
     },
     {
-      name: 'Templates For FYP',
+      name: 'FYP Forms',
       url: '/Templates',
       icon: 'icon-layers',
     },
