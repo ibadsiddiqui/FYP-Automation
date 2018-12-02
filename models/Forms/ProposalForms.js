@@ -78,4 +78,11 @@ module.exports.getAllProposals = function ( callback) {
     ProjectProposal.find({},callback);
 }
 
+module.exports.getProposalBySessions = function ( callback) {
+    ProjectProposal.find({},callback);
+}
 
+
+module.exports.getProposalByProgramOfStudy = function ( callback) {
+    ProjectProposal.find({},callback);
+}
