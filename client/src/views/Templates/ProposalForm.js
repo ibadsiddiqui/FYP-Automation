@@ -16,12 +16,6 @@ export default class ProposalForm extends Component {
     constructor(props) {
         super(props);
         this.initializeState = this.initializeState.bind(this)
-        this.state = {}
-    }
-    componentDidMount(){
-        this.initializeState()
-    }
-    initializeState(){
         this.state = {
             program_of_study: '',
             student_year_session: '',
@@ -45,8 +39,8 @@ export default class ProposalForm extends Component {
             proposal_submitted_At: ''
         }
     }
-
-
+    
+    
     setProgramOfStudy(event) {
         this.setState({
             program_of_study: event.target.value
@@ -165,6 +159,7 @@ export default class ProposalForm extends Component {
     onSubmit() {
         console.log(this.state)
     }
+
     render() {
         return (
             <Card>
@@ -239,7 +234,7 @@ export default class ProposalForm extends Component {
                         <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
                             <span className="label-input100">Upload Use Case or Process Flow Diagram:</span>
                             <div className="col-xs-3">
-                                <input type="file" name="profilepic" onChange={(file) => this.uploadUserCase(file)} />
+                                <input type="file" name="usecaseORprocessflow" accept="image/*" onChange={(file) => this.uploadUserCase(file)} />
                             </div>
                         </div>
 
@@ -255,7 +250,7 @@ export default class ProposalForm extends Component {
                         <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
                             <span className="label-input100">Upload RACI Chart Diagram:</span>
                             <div className="col-xs-3">
-                                <input type="file" name="RACIchart" onChange={(event) => this.uploadRACIChart(event)} />
+                                <input type="file" name="RACIchart" accept="image/*" onChange={(event) => this.uploadRACIChart(event)} />
                             </div>
                         </div>
                     </FormGroup>
