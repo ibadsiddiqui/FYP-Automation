@@ -1,4 +1,4 @@
-const Project = require('./../../models/Projects/Projects')
+const Project = require('../../models/Projects/Projects')
 
 module.exports = async (req, res) => {
     const name = req.body.pname;
