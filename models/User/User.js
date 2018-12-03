@@ -22,6 +22,9 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String
     },
+    hasSubmittedProposal: {
+        type: Boolean,
+    },
     createdAt:{
         type: String,
         default: new Date().toLocaleString()
