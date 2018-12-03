@@ -6,13 +6,19 @@ const ProjectSchema = mongoose.Schema({
     project_name: {
         type: String
     },
-    group_id: {
+    abstract: {
+        type: String
+    },
+    student_CMS_ID: {
         type: String
     },
     status: {
         type: String
     },
-    abstract: {
+    finalReport: {
+        type: String
+    },
+    progressReport: {
         type: String
     },
     createdAt:{
@@ -21,15 +27,14 @@ const ProjectSchema = mongoose.Schema({
     },
     completedAt:{
         type: String,
-        // default: new Date().toLocaleString()
     }
 });
 
 const Project = module.exports = mongoose.model('Project', ProjectSchema);
 
 module.exports.getUserByProject = function (project, callback) {
-    const query = { project: username }
-    Project.findOne(project,callback);
+    const query = { project: project }
+    Project.findOne(query,callback);
 }
 
 module.exports.getProjectById = function (project_id, callback) {
