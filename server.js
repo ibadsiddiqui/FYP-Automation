@@ -61,10 +61,10 @@ app.post('/updateuserprofile', UpdateUserProfileController)
 /////////////////////////////////////////////////////
 
 // project request controllers
-const createNewProjectController = require('./controllers/Project/createNewProjectControllers')
+const submitProjecttController = require('./controllers/Project/submitProjecttController')
 const submitProjectProposal = require('./controllers/Project/submitProjectProposal')
 
-app.post('/insertProject', createNewProjectController)
+app.post('/insertProject', submitProjecttController)
 app.post('/submitProjectProposal', submitProjectProposal)
 
 
