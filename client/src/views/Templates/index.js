@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {
+    Button,
     Card,
     CardBody,
     CardHeader,
     Col,
     ListGroup,
     ListGroupItem,
+    Modal,
+    ModalHeader,
+    ModalBody,
     Row,
     TabContent,
     TabPane,
@@ -19,8 +23,15 @@ class Templates extends Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.toggleSuccessModal = this.toggleSuccessModal.bind(this);
+        this.renderSuccessModal = this.renderSuccessModal.bind(this)
         this.state = {
-            activeTab: 0
+            activeTab: 0,
+            finalReport: "",
+            progressReport: "",
+            modal: false,
+            successModal: false,
         };
     }
 
@@ -40,7 +51,7 @@ class Templates extends Component {
         setTimeout(() => {
             if (reader.readyState === 2) {
                 this.setState({
-                    ProgressReport: reader.result
+                    progressReport: reader.result
                 });
             }
         }, 500)
@@ -52,16 +63,61 @@ class Templates extends Component {
         setTimeout(() => {
             if (reader.readyState === 2) {
                 this.setState({
-                    raciChart: reader.result
+                    finalReport: reader.result
                 });
                 console.log(this.state)
             }
         }, 500)
     }
 
+    componentDidMount() {
+        this.setState({
+            modal: !this.state.modal
+        })
+    }
+
+    toggleModal() {
+        this.setState({
+            modal: !this.state.modal,
+        });
+    }
+
+    renderModal() {
+        return (
+            <Modal isOpen={this.state.modal} toggle={this.toggleModal} className="modal-primary">
+                <ModalHeader toggle={this.toggleModal}>Welcome to FYP Forms</ModalHeader>
+                <ModalBody>
+                    Here You can submit your proposal for FYP, submit status or progress report during your 1st evaluation or better;
+                    you can submit your final report in document form for project.
+                </ModalBody>
+            </Modal>
+        )
+    }
+
+    toggleSuccessModal(){
+        this.setState({
+            successModal: !this.state.successModal
+        })
+    }
+
+    renderSuccessModal() {
+        return (
+            <Modal isOpen={this.state.successModal} toggle={this.toggleSuccessModal} className={'modal-success'}>
+                <ModalHeader toggle={this.toggleSuccessModal}>Modal title</ModalHeader>
+                <ModalBody>
+                    You've successfully submitted the proposal. Please wait while the FYP committee 
+                    reviews your proposal and make decision.
+                </ModalBody>
+            </Modal>
+        )
+    }
+
     render() {
         return (
             <div className="animated fadeIn">
+                {this.renderModal()}
+                {this.renderSuccessModal()}
+
                 <Row>
                     <Col>
                         <Card>
@@ -111,27 +167,27 @@ class Templates extends Component {
                                                     <em><strong>FYP Proposal Guidelines PPT</strong></em> is provided to students so they can resolve their queries with the proposal form, deliverables and could know the rules and regulations.
                                                 </p>
                                                 <Row>
-                                                <Col>
-                                                    <p id="proposal-guideline">
-                                                        <a href={'3-FYP-Propsl-Guidline.pptx'}>1 - Proposal Guidlines</a>
-                                                    </p>
-                                                    <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-guideline" />
-                                                </Col>
-                                                <Col>
-                                                    <p id="proposal-template">
-                                                        <a href={'1-FYP-Propsl-Tmpl-03.docx'}>2 - Proposal Template</a>
-                                                    </p>
-                                                    <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-template" />
-                                                </Col>
-                                                <Col>
-                                                    <p id="proposal-ppt">
-                                                        <a href={'2-FYP-Propsl-PPT-04.pptx'}>3 - Proposal Presentation Template </a>
-                                                    </p>
-                                                    <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-ppt" />
-                                                </Col>
+                                                    <Col>
+                                                        <p id="proposal-guideline">
+                                                            <a href={'3-FYP-Propsl-Guidline.pptx'}>1 - Proposal Guidlines</a>
+                                                        </p>
+                                                        <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-guideline" />
+                                                    </Col>
+                                                    <Col>
+                                                        <p id="proposal-template">
+                                                            <a href={'1-FYP-Propsl-Tmpl-03.docx'}>2 - Proposal Template</a>
+                                                        </p>
+                                                        <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-template" />
+                                                    </Col>
+                                                    <Col>
+                                                        <p id="proposal-ppt">
+                                                            <a href={'2-FYP-Propsl-PPT-04.pptx'}>3 - Proposal Presentation Template </a>
+                                                        </p>
+                                                        <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-ppt" />
+                                                    </Col>
                                                 </Row>
 
-                                                <ProposalForm />
+                                                <ProposalForm modal={this.toggleSuccessModal} />
 
 
                                             </TabPane>
