@@ -24,8 +24,21 @@ const UserSchema = mongoose.Schema({
     },
     hasSubmittedProposal: {
         type: Boolean,
+        default: false
     },
-    createdAt:{
+    hasProposalBeenAccepted: {
+        type: Boolean,
+        default: false
+    },
+    hasSubmittedProgressReport: {
+        type: Boolean,
+        default: false
+    },
+    hasSubmittedFinalReport: {
+        type: Boolean,
+        default: false
+    },
+    createdAt: {
         type: String,
         default: new Date().toLocaleString()
     }
@@ -48,7 +61,7 @@ module.exports.registerUser = function (newUser, callback) {
 
 module.exports.getUserByUsername = function (username, callback) {
     const query = { username: username }
-    User.findOne(query,callback);
+    User.findOne(query, callback);
 }
 
 module.exports.getUserByProfession = function (profession, callback) {
@@ -58,11 +71,45 @@ module.exports.getUserByProfession = function (profession, callback) {
 
 module.exports.getUserById = function (id, callback) {
     User.findById(id, callback);
-}   
+}
 
 module.exports.comparePassword = function (candidatePassword, hash, callback) {
     bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
         if (err) throw err;
         callback(null, isMatch);
+    });
+}
+
+module.exports.updatePropsalStatus = function (id, acceptOrNot, callback) {
+    User.findById(id, (err, user) => {
+        if (err) throw (err);
+
+        user.set({ hasProposalBeenAccepted: acceptOrNot });
+        user.save(callback);
+    });
+}
+
+module.exports.submitProposal = function (id, submit, callback) {
+    User.findById(id, (err, user) => {
+        if (err) throw (err);
+
+        user.set({ hasSubmittedProposal: submit });
+        user.save(callback);
+    });
+}
+
+module.exports.updateProgressReportStatus = function (id, submit, callback) {
+    User.findById(id, (err, user) => {
+        if (err) throw (err);
+        user.set({ hasSubmittedProgressReport: submit });
+        user.save(callback);
+    });
+}
+
+module.exports.updateSubmittedFinalReportStatus = function (id, submit, callback) {
+    User.findById(id, (err, user) => {
+        if (err) throw (err);
+        user.set({ hasSubmittedFinalReport: submit });
+        user.save(callback);
     });
 }
