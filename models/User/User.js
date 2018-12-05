@@ -80,16 +80,15 @@ module.exports.comparePassword = function (candidatePassword, hash, callback) {
     });
 }
 
-module.exports.updatePropsalStatus = function (id, acceptOrNot, callback) {
-    User.findById(id, (err, user) => {
-        if (err) throw (err);
 
-        user.set({ hasProposalBeenAccepted: acceptOrNot });
-        user.save(callback);
-    });
+//use by General
+module.exports.checkProposalSubmissionStatus = function (id, callback) {
+    User.findById(id, callback)
 }
 
-module.exports.submitProposal = function (id, submit, callback) {
+
+// use by user
+module.exports.updateProposalSubmission = function (id, submit, callback) {
     User.findById(id, (err, user) => {
         if (err) throw (err);
 
@@ -98,6 +97,17 @@ module.exports.submitProposal = function (id, submit, callback) {
     });
 }
 
+// use  by admin
+module.exports.updateProposalAcceptanceStatus = function (id, acceptOrNot, callback) {
+    User.findById(id, (err, user) => {
+        if (err) throw (err);
+
+        user.set({ hasProposalBeenAccepted: acceptOrNot });
+        user.save(callback);
+    });
+}
+
+// use by user
 module.exports.updateProgressReportStatus = function (id, submit, callback) {
     User.findById(id, (err, user) => {
         if (err) throw (err);
@@ -106,6 +116,8 @@ module.exports.updateProgressReportStatus = function (id, submit, callback) {
     });
 }
 
+
+// use by user
 module.exports.updateSubmittedFinalReportStatus = function (id, submit, callback) {
     User.findById(id, (err, user) => {
         if (err) throw (err);
