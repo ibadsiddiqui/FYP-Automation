@@ -6,6 +6,9 @@ const ProjectProposalSchema = mongoose.Schema({
     program_of_study: {
         type: String
     },
+    project_name: {
+        type: String
+    },
     student_details: {
         student_fullname: {
             type: String
@@ -14,29 +17,6 @@ const ProjectProposalSchema = mongoose.Schema({
             type: String
         },
         student_enrollment_year: {
-            type: String
-        },
-    },
-    project_details:{
-        project_name: {
-            type: String
-        },
-        problem_statement:{
-            type: String
-        },
-        motivation:{
-            type: String
-        },
-        objective:{
-            type: String
-        },
-        literature_review:{
-            type: String
-        },
-        scope:{
-            type: String
-        },
-        methodology:{
             type: String
         },
     },

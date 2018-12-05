@@ -3,30 +3,54 @@ mongoose.connect('mongodb://localhost/Automation');
 
 // Project Schema
 const ProjectSchema = mongoose.Schema({
-    project_name: {
-        type: String
+    project_details:{
+        project_name: {
+            type: String
+        },
+        problem_statement:{
+            type: String
+        },
+        motivation:{
+            type: String
+        },
+        objective:{
+            type: String
+        },
+        abstract: {
+            type: String
+        },
+        literature_review:{
+            type: String
+        },
+        scope:{
+            type: String
+        },
+        methodology:{
+            type: String
+        },
+        raci_chart: {
+            type: String
+        },
+        usecase_diagram: {
+            type: String
+        },
+        statusReport: {
+            type: String,
+            default: ''
+        }, 
+        finalReport: {
+            type: String,
+            default: ''
+
+        }
     },
-    abstract: {
-        type: String
+    submittedBy : {
+        type: String,
+        default: ''
     },
-    student_CMS_ID: {
-        type: String
-    },
-    status: {
-        type: String
-    },
-    finalReport: {
-        type: String
-    },
-    progressReport: {
-        type: String
-    },
-    createdAt:{
+    proposal_submitted_At:{
         type: String,
         default: new Date().toLocaleString()
-    },
-    completedAt:{
-        type: String,
     }
 });
 
