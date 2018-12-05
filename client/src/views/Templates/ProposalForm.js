@@ -16,7 +16,7 @@ export default class ProposalForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            proposalSubmitted: '',
+
             program_of_study: '',
             student_year_session: '',
             student_enrollment_year: '',
@@ -41,26 +41,6 @@ export default class ProposalForm extends Component {
         }
     }
 
-    componentWillMount() {
-        const token = localStorage.getItem('token');
-        if (token !== null) {
-            fetch('/checkStatus', {
-
-                method: "GET", // *GET, POST, PUT, DELETE, etc.
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": token
-                },
-            }
-            ).then(res => res.json())
-                .then(response => {
-                    this.setState({
-                        proposalSubmitted: response.proposalSubmitted
-                    })
-                })
-        }
-    }
 
     setProgramOfStudy(event) {
         this.setState({
@@ -119,7 +99,7 @@ export default class ProposalForm extends Component {
             scope: event.target.value
         })
     }
-    handleMethodology(event){
+    handleMethodology(event) {
         this.setState({
             methodology: event.target.value
         })
@@ -193,7 +173,7 @@ export default class ProposalForm extends Component {
     }
 
     render() {
-        if (!this.state.proposalSubmitted) {
+        if (!this.props.proposalStatus && !this.props.submissionStatus) {
 
             return (
                 <Card>

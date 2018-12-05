@@ -27,6 +27,7 @@ export default class Templates extends Component {
         this.renderSuccessModal = this.renderSuccessModal.bind(this)
         this.state = {
             activeTab: 0,
+
             finalReport: "",
             progressReport: "",
             modal: false,
@@ -69,6 +70,31 @@ export default class Templates extends Component {
         }, 500)
     }
 
+    componentWillMount() {
+
+        const token = localStorage.getItem('token');
+        if (token !== null) {
+            fetch('/checkStatus', {
+
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": token
+                },
+            }
+            ).then(res => res.json())
+                .then(response => {
+                    this.setState({
+
+                        hasSubmittedProposal: response.hasSubmittedProposal,
+                        hasProposalBeenAccepted: response.hasProposalBeenAccepted,
+                        hasSubmittedProgressReport: response.hasSubmittedProgressReport,
+                        hasSubmittedFinalReport: response.hasSubmittedProgressReport
+                    })
+                })
+        }
+    }
     componentDidMount() {
         this.setState({
             modal: !this.state.modal
@@ -93,7 +119,7 @@ export default class Templates extends Component {
         )
     }
 
-    toggleSuccessModal(){
+    toggleSuccessModal() {
         this.setState({
             successModal: !this.state.successModal
         })
@@ -104,7 +130,7 @@ export default class Templates extends Component {
             <Modal isOpen={this.state.successModal} toggle={this.toggleSuccessModal} className={'modal-success'}>
                 <ModalHeader toggle={this.toggleSuccessModal}>Modal title</ModalHeader>
                 <ModalBody>
-                    You've successfully submitted the proposal. Please wait while the FYP committee 
+                    You've successfully submitted the proposal. Please wait while the FYP committee
                     reviews your proposal and make decision.
                 </ModalBody>
             </Modal>
@@ -129,8 +155,17 @@ export default class Templates extends Component {
                                         <ListGroup id="list-tab" role="tablist">
                                             <ListGroupItem onClick={() => this.toggle(0)} action active={this.state.activeTab === 0} >FYP checklist</ListGroupItem>
                                             <ListGroupItem onClick={() => this.toggle(1)} action active={this.state.activeTab === 1} >Project Proposal - Report Document and Presentation</ListGroupItem>
-                                            <ListGroupItem onClick={() => this.toggle(2)} action active={this.state.activeTab === 2} >First Evaluation - Progress Report and Presentation</ListGroupItem>
-                                            <ListGroupItem onClick={() => this.toggle(3)} action active={this.state.activeTab === 3} >Final Evaluation - Final Report and Presentation</ListGroupItem>
+
+                                            {
+                                                this.state.hasProposalBeenAccepted === true
+                                                &&
+                                                <span>
+
+                                                    <ListGroupItem onClick={() => this.toggle(2)} action active={this.state.activeTab === 2} >First Evaluation - Progress Report and Presentation</ListGroupItem>
+                                                    <ListGroupItem onClick={() => this.toggle(3)} action active={this.state.activeTab === 3} >Final Evaluation - Final Report and Presentation</ListGroupItem>
+                                                </span>
+                                            }
+
                                         </ListGroup>
                                     </Col>
                                     <Col xs="8">
@@ -173,20 +208,14 @@ export default class Templates extends Component {
                                                         <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-guideline" />
                                                     </Col>
                                                     <Col>
-                                                        <p id="proposal-template">
-                                                            <a href={'1-FYP-Propsl-Tmpl-03.docx'}>2 - Proposal Template</a>
-                                                        </p>
-                                                        <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-template" />
-                                                    </Col>
-                                                    <Col>
                                                         <p id="proposal-ppt">
-                                                            <a href={'2-FYP-Propsl-PPT-04.pptx'}>3 - Proposal Presentation Template </a>
+                                                            <a href={'2-FYP-Propsl-PPT-04.pptx'}>2 - Proposal Presentation Template </a>
                                                         </p>
                                                         <ToolTip position="left" text="Click on Right-Mouse button and save it" target="#proposal-ppt" />
                                                     </Col>
                                                 </Row>
 
-                                                <ProposalForm modal={this.toggleSuccessModal} />
+                                                <ProposalForm modal={this.toggleSuccessModal} proposalStatus={this.state.hasSubmittedProposal} submissionStatus={this.state.hasProposalBeenAccepted} />
 
 
                                             </TabPane>

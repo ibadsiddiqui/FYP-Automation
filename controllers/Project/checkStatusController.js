@@ -10,7 +10,6 @@ module.exports = async (request, response) => {
             if (user !== null) {
                 if (user.hasSubmittedProposal) {
                     response.status(200).send({
-                        proposalSubmitted: true,
                         hasSubmittedProposal: user.hasSubmittedProposal,
                         hasProposalBeenAccepted: user.hasProposalBeenAccepted,
                         hasSubmittedProgressReport: user.hasSubmittedProgressReport,
@@ -19,7 +18,6 @@ module.exports = async (request, response) => {
                 }
                 else if (!user.hasSubmittedProposal) {
                     response.status(200).send({
-                        proposalSubmitted: false,
                         hasSubmittedProposal: user.hasSubmittedProposal,
                         hasProposalBeenAccepted: user.hasProposalBeenAccepted,
                         hasSubmittedProgressReport: user.hasSubmittedProgressReport,
