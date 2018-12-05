@@ -53,22 +53,19 @@ app.get('/getusername', GetUsernameAuthController)
 app.get('/getuserinfo', GetUsernameAuthController)
 ///////////////////////////////////////////////////////
 
-
 // user controllers for updating profile
-
 const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
 app.post('/updateuserprofile', UpdateUserProfileController)
 /////////////////////////////////////////////////////
 
 // project request controllers
 const submitProjectController = require('./controllers/Project/submitProposalController')
-const submitProjectProposal = require('./controllers/Project/submitProposalController')
+const submitProjectReportController = require('./controllers/Project/submitProgressReportController')
 const checkProjectSubmissionStatus = require('./controllers/Project/checkStatusController')
-app.post('/insertProject', submitProjectController)
-app.post('/submitProjectProposal', submitProjectProposal)
+
 app.get('/checkStatus', checkProjectSubmissionStatus)
-// app.post('/submitProgressReport', submitProgressReport)
-// app.post('/submitProgressReport', submitProgressReport)
+app.post('/submitProjectProposal', submitProjectController)
+app.post('/submitProjectReport', submitProjectReportController)
 
 //////////////////////////////////////////////////////////
 
