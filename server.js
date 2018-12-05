@@ -60,12 +60,12 @@ app.post('/updateuserprofile', UpdateUserProfileController)
 
 // project request controllers
 const submitProjectController = require('./controllers/Project/submitProposalController')
-const submitProjectReportController = require('./controllers/Project/submitProgressReportController')
+const submitProgressController = require('./controllers/Project/submitProgressReportController')
 const checkProjectSubmissionStatus = require('./controllers/Project/checkStatusController')
 
 app.get('/checkStatus', checkProjectSubmissionStatus)
-app.post('/submitProjectProposal', submitProjectController)
-app.post('/submitProjectReport', submitProjectReportController)
+app.post('/submitProposal', submitProjectController)
+app.post('/submitProgress', submitProgressController)
 
 //////////////////////////////////////////////////////////
 
