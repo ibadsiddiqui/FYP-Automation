@@ -14,7 +14,6 @@ import {
 export default class ProposalForm extends Component {
 
     constructor(props) {
-
         super(props);
         this.state = {
             proposalSubmitted: '',
@@ -23,6 +22,7 @@ export default class ProposalForm extends Component {
             student_enrollment_year: '',
             student_CMS_ID: '',
             project_name: '',
+            abstract: '',
             problem_statement: '',
             motivation: '',
             objective: '',
@@ -44,7 +44,7 @@ export default class ProposalForm extends Component {
     componentWillMount() {
         const token = localStorage.getItem('token');
         if (token !== null) {
-            fetch('/checkProposalSubmission', {
+            fetch('/checkStatus', {
 
                 method: "GET", // *GET, POST, PUT, DELETE, etc.
                 headers: {
@@ -87,6 +87,11 @@ export default class ProposalForm extends Component {
     setProjectName(event) {
         this.setState({
             project_name: event.target.value
+        })
+    }
+    setProjectAbstract(event) {
+        this.setState({
+            abstract: event.target.value
         })
     }
     setProblemStatement(event) {
@@ -232,33 +237,39 @@ export default class ProposalForm extends Component {
 
                         <strong>Project Details</strong>
                         <FormGroup>
+                            <small htmlFor="abstract">Project Abstract</small>
+                            <div className="form-group">
+                                <textarea className="form-control" value={this.state.problem_statement} id="abstract" rows="10" placeholder="Enter your abstract for project" onChange={(event) => this.setProjectAbstract(event)}></textarea>
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
                             <small htmlFor="problemStatement">Problem Statement</small>
                             <div className="form-group">
-                                <textarea className="form-control" value={this.state.problem_statement} id="problemStatement" rows="5" placeholder="Enter your project's problem statement" onChange={(event) => this.setProblemStatement(event)}></textarea>
+                                <textarea className="form-control" value={this.state.problem_statement} id="problemStatement" rows="10" placeholder="Enter your project's problem statement" onChange={(event) => this.setProblemStatement(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
                             <small htmlFor="motivation">Motivation</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="motivation" rows="5" value={this.state.motivation} placeholder="Enter your motivation for the project" onChange={(event) => this.setMotivation(event)}></textarea>
+                                <textarea className="form-control" id="motivation" rows="10" value={this.state.motivation} placeholder="Enter your motivation for the project" onChange={(event) => this.setMotivation(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
                             <small htmlFor="objective">Objective</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="objective" rows="5" value={this.state.objective} placeholder="Enter your objectives of project" onChange={(event) => this.setObjective(event)}></textarea>
+                                <textarea className="form-control" id="objective" rows="10" value={this.state.objective} placeholder="Enter your objectives of project" onChange={(event) => this.setObjective(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
                             <small htmlFor="literatureReview">Literature Review</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="literatureReview" rows="5" value={this.state.literature_review} placeholder="Enter your literature review on project" onChange={(event) => this.setLiteratureReview(event)}></textarea>
+                                <textarea className="form-control" id="literatureReview" rows="10" value={this.state.literature_review} placeholder="Enter your literature review on project" onChange={(event) => this.setLiteratureReview(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
                             <small htmlFor="scope">Scope of the Project</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="scope" rows="5" value={this.state.scope} placeholder="Enter your scope of the project" onChange={(event) => this.setScope(event)}></textarea>
+                                <textarea className="form-control" id="scope" rows="10" value={this.state.scope} placeholder="Enter your scope of the project" onChange={(event) => this.setScope(event)}></textarea>
                             </div>
                             <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
                                 <span className="label-input100">Upload Use Case or Process Flow Diagram:</span>
