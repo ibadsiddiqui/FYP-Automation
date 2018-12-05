@@ -62,12 +62,15 @@ app.post('/updateuserprofile', UpdateUserProfileController)
 
 // project request controllers
 const submitProjectController = require('./controllers/Project/submitProjectController')
-const submitProjectProposal = require('./controllers/Project/submitProjectProposal')
-const checkProposalSubmissionStatus = require('./controllers/Project/checkProposalSubmissionStatus')
+const submitProjectProposal = require('./controllers/Project/submitProjectController')
+const checkProjectSubmissionStatus = require('./controllers/Project/checkProposalSubmissionStatusController')
 app.post('/insertProject', submitProjectController)
 app.post('/submitProjectProposal', submitProjectProposal)
-app.get('/checkProposalSubmission', checkProposalSubmissionStatus)
+app.get('/checkStatus', checkProjectSubmissionStatus)
+// app.post('/submitProgressReport', submitProgressReport)
+// app.post('/submitProgressReport', submitProgressReport)
 
+//////////////////////////////////////////////////////////
 
 
 // process for development
