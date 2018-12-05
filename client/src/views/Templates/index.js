@@ -132,6 +132,12 @@ export default class Templates extends Component {
                 <ModalBody>
                     You've successfully submitted the proposal. Please wait while the FYP committee
                     reviews your proposal and make decision.
+                    <br />
+                    <br />
+                    <br />
+                    <small>
+                        The Page will be redirected to dashboard after successful submission of proposal.
+                    </small>
                 </ModalBody>
             </Modal>
         )

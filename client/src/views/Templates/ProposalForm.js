@@ -9,14 +9,14 @@ import {
     CardFooter,
     Button,
 } from 'reactstrap';
-
+import { Redirect } from 'react-router-dom'
 
 export default class ProposalForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-
+            onSubmitClick: false,
             program_of_study: '',
             student_year_session: '',
             student_enrollment_year: '',
@@ -163,17 +163,44 @@ export default class ProposalForm extends Component {
     }
 
     onSubmit() {
-        if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
-            && this.state.student_CMS_ID && this.state.project_name && this.state.problem_statement
-            && this.state.motivation && this.state.objective && this.state.literature_review
-            && this.state.scope && this.state.useCaseDiagram && this.state.methodology
-            && this.state.raciChart && this.state.supervisor_designation && this.state.supervisor_fullname) {
-            this.props.modal()
-        }
+        // if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
+        //     && this.state.student_CMS_ID && this.state.project_name && this.state.problem_statement
+        //     && this.state.motivation && this.state.objective && this.state.literature_review
+        //     && this.state.scope && this.state.useCaseDiagram && this.state.methodology
+        //     && this.state.raciChart && this.state.supervisor_designation && this.state.supervisor_fullname) {
+        //     fetch('/submitProposal', {
+
+        //         method: "GET", // *GET, POST, PUT, DELETE, etc.
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "Accept": "application/json",
+        //             // "Authorization": token
+        //         },
+        //         body: JSON.stringify(this.state)
+        //     }
+        //     ).then(res => res.json())
+        //         .then(response => {
+        //             this.setState({
+
+        //                 hasSubmittedProposal: response.hasSubmittedProposal,
+        //                 hasProposalBeenAccepted: response.hasProposalBeenAccepted,
+        //                 hasSubmittedProgressReport: response.hasSubmittedProgressReport,
+        //                 hasSubmittedFinalReport: response.hasSubmittedProgressReport
+        //             })
+        //         })
+        // }
+
+        this.props.modal()
+        setTimeout(() => {
+
+            this.setState({
+                onSubmitClick: true
+            })
+        }, 3000);
     }
 
     render() {
-        if (!this.props.proposalStatus && !this.props.submissionStatus) {
+        if (!this.props.proposalStatus && !this.props.submissionStatus && !this.state.onSubmitClick) {
 
             return (
                 <Card>
@@ -328,10 +355,12 @@ export default class ProposalForm extends Component {
                     </CardFooter>
                 </Card>
             );
-        } else {
+        } else if (this.props.submissionStatus && !this.state.onSubmitClick) {
             return (
                 <strong>You have submitted your the proposal for the Project. </strong>
             )
+        } else if (this.state.onSubmitClick) {
+            return <Redirect to={{ pathname: "/" }} />
         }
 
     }
