@@ -48,13 +48,17 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         default: ''
     },
-    proposal_submitted_At:{
+    project_submitted_at:{
         type: String,
         default: new Date().toLocaleString()
     }
 });
 
 const Project = module.exports = mongoose.model('Project', ProjectSchema);
+
+module.exports.createProject = function (project, callback) {
+    Project.create(project,callback);
+}
 
 module.exports.getUserByProject = function (project, callback) {
     const query = { project: project }
