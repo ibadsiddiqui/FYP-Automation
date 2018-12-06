@@ -14,6 +14,7 @@ app.use(express.static('public'))
 app.use(expressEdge);
 
 // allow to accept and transfer data in json
+app.use(express.json({limit: '50mb'}));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
