@@ -37,7 +37,6 @@ export default class ProposalForm extends Component {
             co_supervisor_designation: '',
             external_supervisor_fullname: '',
             external_supervisor_designation: '',
-            proposal_submitted_At: ''
         }
     }
 
@@ -163,40 +162,42 @@ export default class ProposalForm extends Component {
     }
 
     onSubmit() {
-        // if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
-        //     && this.state.student_CMS_ID && this.state.project_name && this.state.problem_statement
-        //     && this.state.motivation && this.state.objective && this.state.literature_review
-        //     && this.state.scope && this.state.useCaseDiagram && this.state.methodology
-        //     && this.state.raciChart && this.state.supervisor_designation && this.state.supervisor_fullname) {
-        //     fetch('/submitProposal', {
+        // console.log(this.state)
+        if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
+            && this.state.student_CMS_ID && this.state.project_name && this.state.problem_statement
+            && this.state.motivation && this.state.objective && this.state.literature_review
+            && this.state.scope && this.state.useCaseDiagram && this.state.methodology
+            && this.state.raciChart && this.state.supervisor_designation && this.state.supervisor_fullname) {
+            fetch('/submitProposal', {
 
-        //         method: "GET", // *GET, POST, PUT, DELETE, etc.
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "Accept": "application/json",
-        //             // "Authorization": token
-        //         },
-        //         body: JSON.stringify(this.state)
-        //     }
-        //     ).then(res => res.json())
-        //         .then(response => {
-        //             this.setState({
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": localStorage.getItem('token')
+                },
+                body: JSON.stringify(this.state)
+            }
+            ).then(res => res.json())
+                .then((response) => {
+                    if(response.status == 'submitted'){
 
-        //                 hasSubmittedProposal: response.hasSubmittedProposal,
-        //                 hasProposalBeenAccepted: response.hasProposalBeenAccepted,
-        //                 hasSubmittedProgressReport: response.hasSubmittedProgressReport,
-        //                 hasSubmittedFinalReport: response.hasSubmittedProgressReport
-        //             })
-        //         })
-        // }
+                        this.props.modal()
+                        setTimeout(() => {
+                            
+                            this.setState({
+                                onSubmitClick: true
+                            })
+                        }, 2500);
+                    } else {
+                        alert('try again please')
+                        this.setState({
+                            onSubmitClick: true
+                        })
+                    }
+                })
 
-        this.props.modal()
-        setTimeout(() => {
-
-            this.setState({
-                onSubmitClick: true
-            })
-        }, 3000);
+        }
     }
 
     render() {
@@ -210,7 +211,7 @@ export default class ProposalForm extends Component {
 
                     </CardHeader>
                     <CardBody>
-                        <strong> This form should be filled only once and will only be available if the project gets rejected</strong>
+                        <strong> This form should be filled carefully because, it will only be available if the project gets rejected</strong>
                         <FormGroup>
                             <small htmlFor="programName">Program of Study</small>
                             <Input type="text" defaultValue={this.state.program_of_study} id="programName" onChange={(event) => this.setProgramOfStudy(event)} placeholder="Enter your program of study" />
@@ -246,7 +247,7 @@ export default class ProposalForm extends Component {
                         <FormGroup>
                             <small htmlFor="abstract">Project Abstract</small>
                             <div className="form-group">
-                                <textarea className="form-control" value={this.state.problem_statement} id="abstract" rows="10" placeholder="Enter your abstract for project" onChange={(event) => this.setProjectAbstract(event)}></textarea>
+                                <textarea className="form-control" value={this.state.abstract} id="abstract" rows="10" placeholder="Enter your abstract for project" onChange={(event) => this.setProjectAbstract(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
@@ -355,7 +356,7 @@ export default class ProposalForm extends Component {
                     </CardFooter>
                 </Card>
             );
-        } else if (this.props.submissionStatus && !this.state.onSubmitClick) {
+        } else if (this.props.proposalStatus && !this.state.onSubmitClick ) {
             return (
                 <strong>You have submitted your the proposal for the Project. </strong>
             )
