@@ -86,7 +86,7 @@ export default class Templates extends Component {
             ).then(res => res.json())
                 .then(response => {
                     this.setState({
-
+                        
                         hasSubmittedProposal: response.hasSubmittedProposal,
                         hasProposalBeenAccepted: response.hasProposalBeenAccepted,
                         hasSubmittedProgressReport: response.hasSubmittedProgressReport,
