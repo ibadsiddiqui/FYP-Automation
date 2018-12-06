@@ -10,7 +10,7 @@ const ProjectProposalSchema = mongoose.Schema({
         type: String
     },
     student_details: {
-        student_fullname: {
+        student_CMS_ID: {
             type: String
         },
         student_year_session: {
@@ -46,7 +46,7 @@ const ProjectProposalSchema = mongoose.Schema({
             }
         },
     },
-    proposal_submitted_At:{
+    proposal_submitted_At: {
         type: String,
         default: new Date().toLocaleString()
     }
@@ -54,15 +54,19 @@ const ProjectProposalSchema = mongoose.Schema({
 
 const ProjectProposal = module.exports = mongoose.model('ProjectProposal', ProjectProposalSchema);
 
-module.exports.getAllProposals = function ( callback) {
-    ProjectProposal.find({},callback);
+module.exports.submitProposal = function (newProposal, callback) {
+    ProjectProposal.create(newProposal, callback)
 }
 
-module.exports.getProposalBySessions = function ( callback) {
-    ProjectProposal.find({},callback);
+module.exports.getAllProposals = function (callback) {
+    ProjectProposal.find({}, callback);
 }
 
+// module.exports.getProposalBySessions = function (callback) {
+//     ProjectProposal.find({}, callback);
+// }
 
-module.exports.getProposalByProgramOfStudy = function ( callback) {
-    ProjectProposal.find({},callback);
-}
+
+// module.exports.getProposalByProgramOfStudy = function (callback) {
+//     ProjectProposal.find({}, callback);
+// }
