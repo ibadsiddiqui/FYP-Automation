@@ -22,7 +22,6 @@
                     <tr>
                         <th>Project Name</th>
                         <th>Student ID</th>
-                        <th>Status</th>
                         <th>Abstract</th>
                         <th>Created At</th>
                         <th>Status Report</th>
@@ -30,16 +29,10 @@
                     </tr>
 
 
-                    @each(project in projects)
+                    @each(project in renderingProjects)
                     <tr>
                         <td>{{project['project_details'].project_name}}</td>
                         <td>{{project.submittedBy}}</td>
-                        <td>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
                         <td type="button"  data-toggle="modal" data-target="#exampleModal">
                                 <a>Abstract</a>
                         </td>
@@ -52,12 +45,13 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h3 class="modal-title" id="exampleModalLabel">Abstract of Project</h3>
+                                    <h3 class="modal-title" id="exampleModalLabel">{{project['project_details'].project_name}}</h3>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    <strong>Abstract: </strong>
                                     {{project['project_details'].abstract}}
                                 </div>
                             </div>
@@ -65,6 +59,7 @@
                     </div>
                     @endeach
                 </table>                 
+
             </div>
         </div>
     </div>
