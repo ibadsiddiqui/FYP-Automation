@@ -32,6 +32,7 @@ const adminManageFYPList = require('./controllers/Admin/adminManageFYPList')
 
 app.get('/',  adminDashboard)
 app.get('/manageusers', adminManageUsers)
+app.post('/manageusers', adminManageUsers)
 app.get('/fyplist', adminManageFYPList)
 app.get('/manageeligibilities', adminManageEligibilities)
 app.get('/manageprojects', adminManageProjects)

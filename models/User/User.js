@@ -41,6 +41,10 @@ const UserSchema = mongoose.Schema({
     createdAt: {
         type: String,
         default: new Date().toLocaleString()
+    },
+    blocked: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -50,7 +54,7 @@ module.exports.registerUser = function (newUser, callback) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) {
-                console.log(err);
+                throw err;
             }
             newUser.password = hash;
             // newUser.save(callback);
@@ -122,6 +126,14 @@ module.exports.updateSubmittedFinalReportStatus = function (id, submit, callback
     User.findById(id, (err, user) => {
         if (err) throw (err);
         user.set({ hasSubmittedFinalReport: submit });
+        user.save(callback);
+    });
+}
+
+module.exports.toggleUserBlocking = function (id, submit, callback) {
+    User.findById(id, (err, user) => {
+        if (err) throw (err);
+        user.set({ blocked: submit });
         user.save(callback);
     });
 }

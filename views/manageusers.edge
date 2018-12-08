@@ -38,10 +38,11 @@
                 <td>{{user.email}}</td>
                 <td>{{user.profession}}</td>
                 <td>{{user.createdAt}}</td>
-                <td><label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                  </label> 
+                <td>
+                  <form action="/manageusers" method='post'>
+                    <input type="hidden" name="id" value={{user._id}} />
+                    <button class="btn btn-primary" id={{user._id}} value={{user.blocked === true ? 'blocked': 'unblocked' }} name="status">{{user.blocked === true ? 'blocked': 'unblocked' }}</button> 
+                  </form>
                 </td>
               </tr>
                 @endeach
