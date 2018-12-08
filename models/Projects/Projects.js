@@ -74,6 +74,11 @@ module.exports.updateSubmissionOfFinalReport = function (userID, submit, callbac
     });
 }
 
+
+module.exports.getAllProjects = function(callback) {
+    Project.find({}, callback);
+
+}
 module.exports.updateSubmissionOfProgressReport = function (userID, submit, callback) {
     const query = {submittedBy: userID}
     Project.findOne(query, (err, project) => {
