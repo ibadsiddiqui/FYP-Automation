@@ -129,11 +129,11 @@ class Register extends Component {
         "Accept": "application/json",
       },
       body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
+        name: this.state.name.toLowerCase(),
+        email: this.state.email.toLowerCase(),
         username: this.state.username,
         password: this.state.password,
-        profession: this.state.profession
+        profession: this.state.profession.toLowerCase()
       }),
     }).then(res => res.json())
       .then(res => this.setState({
