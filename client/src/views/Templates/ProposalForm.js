@@ -358,7 +358,7 @@ export default class ProposalForm extends Component {
             );
         } else if (this.props.proposalStatus && !this.state.onSubmitClick ) {
             return (
-                <strong>You have submitted your the proposal for the Project. </strong>
+                <strong>You have submitted your  proposal for the Project. Now wait while the committee accepts your project. </strong>
             )
         } else if (this.state.onSubmitClick) {
             return <Redirect to={{ pathname: "/" }} />
