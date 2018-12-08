@@ -64,11 +64,12 @@ const checkProjectSubmissionStatus = require('./controllers/Project/checkStatusC
 const submitProjectController = require('./controllers/Project/submitProposalController')
 const submitProgressController = require('./controllers/Project/submitProgressReportController')
 const submitFinalReportController = require('./controllers/Project/submitFinalReportController')
+const fetchAllProjects = require('./controllers/Project/ListOfProjectController')
 app.get('/checkStatus', checkProjectSubmissionStatus)
 app.post('/submitProposal', submitProjectController)
 app.post('/submitProgressReport', submitProgressController)
 app.post('/submitFinalReport', submitFinalReportController)
-
+app.get('/getAllProject', fetchAllProjects)
 //////////////////////////////////////////////////////////
 
 
