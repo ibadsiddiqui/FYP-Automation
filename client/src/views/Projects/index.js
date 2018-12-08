@@ -8,7 +8,8 @@ class Projects extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: 0
+      activeTab: 0,
+      listOfProject: []
     };
   }
 
@@ -20,6 +21,18 @@ class Projects extends Component {
     }
   }
 
+  componentWillMount(){
+    fetch('/getAllProject', {
+      method: 'GET',
+    })
+    .then(res => res.json())
+    .then(response => {
+      this.setState({
+        listOfProject: [...response]
+      })
+      console.log(this.state.listOfProject[0])
+    })
+  }
   render() {
     return (
       <div className="animated fadeIn">
