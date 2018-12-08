@@ -6,7 +6,7 @@
 
   <!-- Main Content -->
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-xs-9">
         <div class="content-box-large">
             <div class="panel-heading">
                 <div class="panel-title">Manage Projects</div>
@@ -21,18 +21,19 @@
                 <table class="table">
                     <tr>
                         <th>Project Name</th>
-                        <th>Groud ID</th>
+                        <th>Student ID</th>
                         <th>Status</th>
                         <th>Abstract</th>
                         <th>Created At</th>
-                        <th>Completed At</th>
+                        <th>Status Report</th>
+                        <th>Final Report</th>
                     </tr>
 
 
                     @each(project in projects)
                     <tr>
-                        <td>{{project.project_name}}</td>
-                        <td>{{project.group_id}}</td>
+                        <td>{{project['project_details'].project_name}}</td>
+                        <td>{{project.submittedBy}}</td>
                         <td>
                             <label class="switch">
                                 <input type="checkbox">
@@ -42,8 +43,9 @@
                         <td type="button"  data-toggle="modal" data-target="#exampleModal">
                                 <a>Abstract</a>
                         </td>
-                        <td>{{project.createdAt}}</td>
-                        <td>{{project.completedAt}}</td>
+                        <td>{{project.project_submitted_at}}</td>
+                        <td> <a href={{project['project_details'].statusReport}} downlad target="_blank">Status Report</a> </td>
+                        <td> <a href={{project['project_details'].finalReport}} downlad>Final Report</a> </td>
                     </tr>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +58,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{project.abstract}}
+                                    {{project['project_details'].abstract}}
                                 </div>
                             </div>
                         </div>
