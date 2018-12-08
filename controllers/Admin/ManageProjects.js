@@ -3,7 +3,6 @@ const User = require('./../../models/User/User')
 module.exports = async (request, response) => {
     const projects = await Project.find({});
     const users = await User.find({});
-    // console.log(users)
     const renderingProjects = projects.filter((project) => {
         return project['project_details'].submittedBy == users.username
     })

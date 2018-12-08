@@ -125,7 +125,6 @@ export default class ProposalForm extends Component {
                 this.setState({
                     raciChart: reader.result
                 });
-                console.log(this.state)
             }
         }, 500)
     }
@@ -162,7 +161,6 @@ export default class ProposalForm extends Component {
     }
 
     onSubmit() {
-        // console.log(this.state)
         if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
             && this.state.student_CMS_ID && this.state.project_name && this.state.problem_statement
             && this.state.motivation && this.state.objective && this.state.literature_review

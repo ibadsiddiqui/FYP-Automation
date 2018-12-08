@@ -30,7 +30,6 @@ class Projects extends Component {
       this.setState({
         listOfProject: [...response]
       })
-      console.log(this.state.listOfProject[0])
     })
   }
   render() {

@@ -31,7 +31,6 @@ class Register extends Component {
       this.setState({
         professionValid: true
       })
-      console.log(this.state)
     } else if (this.state.profession.length === 0) {
       this.setState({
         profession: null
@@ -41,7 +40,6 @@ class Register extends Component {
       this.setState({
         professionValid: false
       })
-      console.log(this.state)
     }
   }
 

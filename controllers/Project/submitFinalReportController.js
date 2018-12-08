@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
                     await Project.updateSubmissionOfFinalReport(user.username, progressReport, (err, updatedReport) => {
                         if(err) throw err;
                         if(updatedReport !== null){
-                            console.log(updatedReport)
                             res.status(200).send({redirect: true})
                         }
                     })
