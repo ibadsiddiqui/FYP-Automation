@@ -447,7 +447,7 @@ class Dashboard extends Component {
                       <td>
                         <div>{this.props.userDetail.name}</div>
                         <div className="small text-muted">
-                          <span>New</span> | Registered: Jan 1, 2015
+                          <span>New</span> | Registered at: {this.props.userDetail.createdAt}
                       </div>
                       </td>
                       <td className="text-center">
