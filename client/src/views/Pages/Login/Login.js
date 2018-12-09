@@ -16,6 +16,7 @@ class Login extends Component {
       doesUserNameExist: null,
       auth: null,
       token: '',
+      blocked: false,
     }
   }
 
@@ -63,6 +64,7 @@ class Login extends Component {
           auth: res.auth,
           token: res.token,
           doesUserNameExist: true,
+          blocked: res.blocked
         })
       });
   }
@@ -89,6 +91,13 @@ class Login extends Component {
                           <strong>Sorry!</strong> This username does not exist.
                                 </div>
                       }
+                      {
+                        this.state.blocked === true
+                        &&
+                        <div className="alert alert-danger">
+                          <strong>Sorry!</strong> This username is blocked.
+                                </div>
+                      }
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -109,6 +118,7 @@ class Login extends Component {
                         {
                           this.state.doesUserNameExist === true
                           && this.state.auth === true
+                          && this.state.blocked === false
                           &&
                           <Col xs="6">
                             <Link to="/">

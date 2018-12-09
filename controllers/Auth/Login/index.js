@@ -20,6 +20,7 @@ module.exports = (request, response) => {
                     response.status(200).send({
                         auth: true,
                         token: token,
+                        blocked: user.blocked
                     });
                 } else {
                     response.status(500).send({
