@@ -122,25 +122,25 @@ const Dashboard = Loadable({
   loading: Loading,
 });
 
-const CoreUIIcons = Loadable({
-  loader: () => import('./views/Icons/CoreUIIcons'),
-  loading: Loading,
-});
+// const CoreUIIcons = Loadable({
+//   loader: () => import('./views/Icons/CoreUIIcons'),
+//   loading: Loading,
+// });
 
-const Flags = Loadable({
-  loader: () => import('./views/Icons/Flags'),
-  loading: Loading,
-});
+// const Flags = Loadable({
+//   loader: () => import('./views/Icons/Flags'),
+//   loading: Loading,
+// });
 
-const FontAwesome = Loadable({
-  loader: () => import('./views/Icons/FontAwesome'),
-  loading: Loading,
-});
+// const FontAwesome = Loadable({
+//   loader: () => import('./views/Icons/FontAwesome'),
+//   loading: Loading,
+// });
 
-const SimpleLineIcons = Loadable({
-  loader: () => import('./views/Icons/SimpleLineIcons'),
-  loading: Loading,
-});
+// const SimpleLineIcons = Loadable({
+//   loader: () => import('./views/Icons/SimpleLineIcons'),
+//   loading: Loading,
+// });
 
 // const Alerts = Loadable({
 //   loader: () => import('./views/Notifications/Alerts'),

@@ -178,7 +178,7 @@ export default class ProposalForm extends Component {
             }
             ).then(res => res.json())
                 .then((response) => {
-                    if(response.status == 'submitted'){
+                    if(response.status === 'submitted'){
 
                         this.props.modal()
                         setTimeout(() => {

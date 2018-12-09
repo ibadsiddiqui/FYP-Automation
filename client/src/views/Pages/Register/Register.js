@@ -143,7 +143,7 @@ class Register extends Component {
 
   componentWillUnmount() {
     this.setState({
-      ... null
+      ...null
     })
   }
 

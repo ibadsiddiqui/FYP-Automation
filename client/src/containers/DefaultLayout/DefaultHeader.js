@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
+import {
+  DropdownItem, 
+  DropdownMenu, 
+  DropdownToggle, 
+  Nav
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 
@@ -45,8 +50,8 @@ class DefaultHeader extends Component {
             <AppHeaderDropdown direction="down">
 
               <DropdownToggle nav>
-                <img src={'assets/img/avatars/user.png'} className="img-avatar" alt="admin@bootstrapmaster.com"  id="user"/>
-                <ToolTip position="bottom" text={this.props.username} target="#user"/>
+                <img src={'assets/img/avatars/user.png'} className="img-avatar" alt="admin@bootstrapmaster.com" id="user" />
+                <ToolTip position="bottom" text={this.props.username} target="#user" />
 
               </DropdownToggle>
 
