@@ -29,16 +29,23 @@ const adminManageEligibilities = require('./controllers/Admin/ManageEligibilitie
 const adminManageUsers = require('./controllers/Admin/ManageUsers');
 const adminManageProjects = require('./controllers/Admin/ManageProjects')
 const adminManageFYPList = require('./controllers/Admin/adminManageFYPList')
-
+const AdmintoogleEligibilities = require('./controllers/Admin/AdmintoogleEligibilities')
 app.get('/',  adminDashboard)
 app.get('/manageusers', adminManageUsers)
 app.post('/manageusers', adminManageUsers)
 app.get('/fyplist', adminManageFYPList)
 app.get('/manageeligibilities', adminManageEligibilities)
+app.post('/toggleeligibility', AdmintoogleEligibilities)
 app.get('/manageprojects', adminManageProjects)
 ////////////////////////////////////////////////////////
 
+const eligibilityFormSubmission = require('./controllers/EligibilityForm/submitEligibilityForm')
+app.post('/submiteligibilityform', eligibilityFormSubmission)
 
+
+
+
+/////////////////////////////////////////////////////
 
 // authentication work
 const LoginAuthController = require('./controllers/Auth/Login')
