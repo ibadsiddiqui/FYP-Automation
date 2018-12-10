@@ -5,7 +5,7 @@ import './App.scss';
 // Containers
 import { DefaultLayout } from './containers';
 // Pages
-import { Login, Page404, Page500, Register } from './views/Pages';
+import { Login, Page404, Page500, Register, EligibilityForm } from './views/Pages';
 
 // import { renderRoutes } from 'react-router-config';
 
@@ -14,6 +14,7 @@ class App extends Component {
     return (
       <HashRouter>
         <Switch>
+          <Route exact path="/eligibitycheckup" name="Login Page" component={EligibilityForm} />
           <Route exact path="/login" name="Login Page" component={Login} />
           <Route exact path="/register" name="Register Page" component={Register} />
           <Route exact path="/404" name="Page 404" component={Page404} />

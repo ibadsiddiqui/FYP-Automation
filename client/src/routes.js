@@ -32,10 +32,10 @@ function Loading() {
 //   loading: Loading,
 // });
 
-// const Forms = Loadable({
-//   loader: () => import('./views/Base/Forms'),
-//   loading: Loading,
-// });
+const Forms = Loadable({
+  loader: () => import('./views/Base/Forms'),
+  loading: Loading,
+});
 
 // const Jumbotrons = Loadable({
 //   loader: () => import('./views/Base/Jumbotrons'),
@@ -205,7 +205,7 @@ const routes = [
   { path: '/Templates', exact: true, name: 'Templates For FYP', component: Templates },
   // { path: '/base', exact: true, name: 'Base', component: Cards },
   // { path: '/base/cards', name: 'Cards', component: Cards },
-  // { path: '/base/forms', name: 'Forms', component: Forms },
+  { path: '/base/forms', name: 'Forms', component: Forms },
   // { path: '/base/switches', name: 'Switches', component: Switches },
   // { path: '/base/tables', name: 'Tables', component: Tables },
   // { path: '/base/tabs', name: 'Tabs', component: Tabs },
