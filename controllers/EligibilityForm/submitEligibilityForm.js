@@ -2,9 +2,9 @@ const Form = require('./../../models/Forms/EligibilityForm')
 
 module.exports = async (req, res) => {
     const model = {
+        student_CMS_ID: req.body.cmsID,
         Form: {
             student_name: req.body.fullname,
-            student_CMS_ID: req.body.cmsID,
             student_current_semester: req.body.currentsemester,
             student_courses_cleared: req.body.no_of_courses_cleared,
             student_current_CGPA: req.body.currentCGPA,
