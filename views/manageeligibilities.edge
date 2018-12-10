@@ -43,8 +43,13 @@
                 <td>
                   <form action="/toggleeligibility" method='post'>
                     <input type="hidden" name="id" value={{user._id}} />
-                    <button class="btn btn-primary btn-sm" id="status_value" value='accepted' name="status">accept</button> 
-                    <button class="btn btn-primary btn-sm" id="status_value" value= 'rejected' name="status">reject</button> 
+                    @if(user.status === 'pending')
+                      <button class="btn btn-primary btn-sm" id="status_value" value='accepted' name="status">accept</button> 
+                      <button class="btn btn-primary btn-sm" id="status_value" value= 'rejected' name="status">reject</button> 
+                    @else
+                      <button class="btn btn-primary btn-sm" id="status_value" value={{user.status}} name="status" disabled>{{user.status}}</button> 
+
+                    @endif
                   </form>
                 </td>
               </tr>

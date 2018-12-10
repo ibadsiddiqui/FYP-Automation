@@ -3,12 +3,11 @@ mongoose.connect('mongodb://localhost/Automation');
 
 // Project Schema
 const EligibilityFormSchema = mongoose.Schema({
+    student_CMS_ID: {
+        type: String
+    },
     Form: {
-
         student_name: {
-            type: String
-        },
-        student_CMS_ID: {
             type: String
         },
         student_current_semester: {
@@ -45,10 +44,15 @@ module.exports.getAllForms = function (callback) {
 module.exports.toggleStatus = function (formId, status, callback) {
     EligibilityForm.findById(formId, (err, form) => {
         if (err) throw (err);
-        if(form !== null){
+        if (form !== null) {
             form.set({ status: status });
             form.save(callback);
         }
     });
-
 }
+module.exports.checkStatus = function (student_CMS_ID, callback) {
+    const query = { student_CMS_ID: student_CMS_ID
+    };
+    EligibilityForm.find(query, callback)
+}
+
