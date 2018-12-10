@@ -29,7 +29,7 @@ const adminManageEligibilities = require('./controllers/Admin/ManageEligibilitie
 const adminManageUsers = require('./controllers/Admin/ManageUsers');
 const adminManageProjects = require('./controllers/Admin/ManageProjects')
 const adminManageFYPList = require('./controllers/Admin/adminManageFYPList')
-const AdmintoogleEligibilities = require('./controllers/Admin/AdmintoogleEligibilities')
+const AdmintoogleEligibilities = require('./controllers/Admin/AdmintoggleEligibilities')
 app.get('/',  adminDashboard)
 app.get('/manageusers', adminManageUsers)
 app.post('/manageusers', adminManageUsers)
@@ -39,8 +39,10 @@ app.post('/toggleeligibility', AdmintoogleEligibilities)
 app.get('/manageprojects', adminManageProjects)
 ////////////////////////////////////////////////////////
 
-const eligibilityFormSubmission = require('./controllers/EligibilityForm/submitEligibilityForm')
+const eligibilityFormSubmission = require('./controllers/EligibilityForm/submitEligibilityForm');
+const checkElgibilityStatus = require('./controllers/EligibilityForm/checkElgibilityStatus')
 app.post('/submiteligibilityform', eligibilityFormSubmission)
+app.post('/checkElgibilityStatus', checkElgibilityStatus)
 
 
 
@@ -56,9 +58,9 @@ app.post('/register', RegisterAuthController);
 ////////////////////////////////////////////////
 
 
-// getting info using token
+// getting info using 
 const GetUsernameAuthController = require('./controllers/UserInfo/GetDetails')
-app.get('/getusername', GetUsernameAuthController)
+app.post('/getusername', GetUsernameAuthController)
 app.get('/getuserinfo', GetUsernameAuthController)
 ///////////////////////////////////////////////////////
 
