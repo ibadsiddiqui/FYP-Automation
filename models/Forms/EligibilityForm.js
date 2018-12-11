@@ -51,8 +51,7 @@ module.exports.toggleStatus = function (formId, status, callback) {
     });
 }
 module.exports.checkStatus = function (student_CMS_ID, callback) {
-    const query = { student_CMS_ID: student_CMS_ID
-    };
-    EligibilityForm.find(query, callback)
+    const query = { student_CMS_ID: student_CMS_ID};
+    EligibilityForm.findOne(query, callback)
 }
 
