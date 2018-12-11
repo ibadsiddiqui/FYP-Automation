@@ -37,6 +37,7 @@ app.get('/fyplist', adminManageFYPList)
 app.get('/manageeligibilities', adminManageEligibilities)
 app.post('/toggleeligibility', AdmintoogleEligibilities)
 app.get('/manageprojects', adminManageProjects)
+app.post('/manageprojects', adminManageProjects)
 ////////////////////////////////////////////////////////
 
 const eligibilityFormSubmission = require('./controllers/EligibilityForm/submitEligibilityForm');
