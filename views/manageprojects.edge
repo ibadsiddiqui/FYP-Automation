@@ -9,7 +9,7 @@
     <div class="col-xs-9">
         <div class="content-box-large">
             <div class="panel-heading">
-                <div class="panel-title">Manage Projects</div>
+                <h4 >Manage Projects</h4>
 
                 <div class="panel-options">
                 <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
@@ -37,29 +37,74 @@
                                 <a>Abstract</a>
                         </td>
                         <td>{{project.project_submitted_at}}</td>
-                        <td> <a href={{project['project_details'].statusReport}} downlad target="_blank">Status Report</a> </td>
-                        <td> <a href={{project['project_details'].finalReport}} downlad>Final Report</a> </td>
-                    </tr>
+                        @if(project['project_details'].statusReport !== '')
+                            <td> <a href={{project['project_details'].statusReport}} downlad target="_blank">Status Report</a> </td>
+                            <td> <a href={{project['project_details'].finalReport}} downlad>Final Report</a> </td>
+                        @else 
+                            <td> Haven't Submitted</td>
+                            <td> Haven't Submitted </td>
+                        @endif
+                        <td>
+                            
+                        </td>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" id="exampleModalLabel">{{project['project_details'].project_name}}</h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <strong>Abstract: </strong>
-                                    {{project['project_details'].abstract}}
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="exampleModalLabel">{{project['project_details'].project_name}}</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <strong>Abstract: </strong>
+                                        {{project['project_details'].abstract}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @endeach
+                        @endeach
+    
+                        
+                    </tr>
                 </table>                 
+                <h4 >Manage Proposals</h4>
+                
+                <table class="table" >
+                    <tr>
+                        <th style="align-content: center; align-self: center; align-items: center; text-align: center">Student ID</th>
+                        <th style="align-content: center; align-self: center; align-items: center; text-align: center">Has Submitted Poposal</th>
+                        <th style="align-content: center; align-self: center; align-items: center; text-align: center">Should Accept Project Proposal</th>
+                    </tr>
+                    
+                    @each(user in users)
+                    
+                    @if(user.hasSubmittedProposal == true)
+                        <tr>
+                            <td style="align-content: center; align-self: center; align-items: center; text-align: center">{{user.username}}</td>
+                            <td style="align-content: center; align-self: center;align-items: center; text-align: center">{{user.hasSubmittedProposal}}</td>
+                            
+                            <td style="align-content: center; align-self: center; align-items: center; text-align: center">
+                                <form action="/manageprojects" method="post">                                
+                                        @if(!user.hasProposalBeenAccepted)
+                                            <input type="hidden" name="id" value={{user.username}} />
 
+                                            <button class="btn btn-primary btn-sm" id="accept" value="Accept" name="status">Accept</button> 
+                                            <button class="btn btn-danger btn-sm" id="reject" value="Reject" name="status">Reject</button> 
+                                        @else 
+                                            <button class="btn btn-success btn-sm" id="accepted" value="Accepted" name="status" disabled>Accepted</button> 
+
+                                        @endif
+                                </form>
+                            </td>
+                        </tr>
+                    @endif
+                    @endeach
+    
+    
+                </table>                 
+                    
             </div>
         </div>
     </div>
