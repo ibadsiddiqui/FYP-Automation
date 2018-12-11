@@ -105,7 +105,7 @@ class Register extends Component {
         "Accept": "application/json",
       },
       body: JSON.stringify({
-        cms_id: event.target.value,
+        cms_id: this.state.username,
       }),
     }).then(res => res.json())
       .then(res => {
@@ -124,18 +124,16 @@ class Register extends Component {
           }
         } else {
           this.setState({
-            status: 'pending'
+            status: ''
           })
         }
       })
-      console.log(this.state)
   }
   setUsername(event) {
     this.setState({
       username: event.target.value
     });
 
-    this.checkEligibility(event);
     fetch('/getusername', {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -274,6 +272,7 @@ class Register extends Component {
                         required="required"
                         value={this.state.username}
                         onChange={(event) => this.setUsername(event)} autoComplete="username"
+                        onBlur={(event) => this.checkEligibility(event)}
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
