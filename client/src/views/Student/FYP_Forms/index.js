@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
 import ProposalForm from './ProposalForm'
-import ToolTip from './../../components/ToolTip'
+import ToolTip from './../../../components/ToolTip'
 
 export default class Templates extends Component {
 

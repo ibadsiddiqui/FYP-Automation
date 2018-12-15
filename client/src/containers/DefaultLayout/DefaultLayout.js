@@ -15,9 +15,10 @@ import {
   AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_student_nav';
+import student_navigation from '../../_student_nav';
+import teacher_navigation from '../../_teacher_nav'
 // routes config
-import routes from '../../routes';
+import routes from '../../student_routes';
 import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
@@ -79,7 +80,16 @@ class DefaultLayout extends React.PureComponent {
               <AppSidebar fixed display="lg">
                 <AppSidebarHeader />
                 <AppSidebarForm />
-                <AppSidebarNav navConfig={navigation} {...this.props} />
+                {
+                  this.state.user.profession == 'student'
+                  &&
+                  <AppSidebarNav navConfig={student_navigation} {...this.props} />
+                }
+                {
+                  this.state.user.profession == 'teacher'
+                  &&
+                  <AppSidebarNav navConfig={teacher_navigation} {...this.props} />
+                }
                 <AppSidebarFooter />
                 <AppSidebarMinimizer />
               </AppSidebar>
