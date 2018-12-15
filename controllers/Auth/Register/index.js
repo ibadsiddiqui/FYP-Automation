@@ -8,7 +8,7 @@ module.exports = async (request, response) => {
     const username = request.body.username;
     const email = request.body.email;
     const password = request.body.password;
-    const profession = request.body.profession;
+    const profession = request.body.profession.toLowerCase();
 
 
     await User.getUserByUsername(username, (err, user) => {
