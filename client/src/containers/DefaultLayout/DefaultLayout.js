@@ -49,7 +49,7 @@ class DefaultLayout extends React.PureComponent {
         'Authorization': this.state.token
       },
     })
-      .then( res => res.json())
+      .then(res => res.json())
       .then(res => {
         if (res.response === true) {
           this.setState({
@@ -74,7 +74,7 @@ class DefaultLayout extends React.PureComponent {
           &&
           <div>
             <AppHeader fixed>
-              <DefaultHeader username={this.state.user.name}/>
+              <DefaultHeader username={this.state.user.name} />
             </AppHeader>
             <div className="app-body">
               <AppSidebar fixed display="lg">
@@ -94,19 +94,38 @@ class DefaultLayout extends React.PureComponent {
                 <AppSidebarMinimizer />
               </AppSidebar>
               <main className="main">
-                <AppBreadcrumb appRoutes={routes}/>
+                <AppBreadcrumb appRoutes={routes} />
                 <Container fluid>
-                  <Switch>
-                    {routes.map((route, idx) => {
-                      return route.component ? (
-                        <Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
-                          <route.component {...props} userDetail={this.state.user}/>
-                        )} />)
-                        : (null);
-                    },
-                    )}
-                    <Redirect from="/" to="/dashboard" />
-                  </Switch>
+                  {
+                    this.state.user.profession == 'student'
+                    &&
+                    <Switch>
+                      {routes.map((route, idx) => {
+                        return route.component ? (
+                          <Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
+                            <route.component {...props} userDetail={this.state.user} />
+                          )} />)
+                          : (null);
+                      },
+                      )}
+                      <Redirect from="/" to="/dashboard" />
+                    </Switch>
+                  }
+                  {
+                    this.state.user.profession == 'teacher'
+                    &&
+                    <Switch>
+                      {routes.map((route, idx) => {
+                        return route.component ? (
+                          <Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
+                            <route.component {...props} userDetail={this.state.user} />
+                          )} />)
+                          : (null);
+                      },
+                      )}
+                      <Redirect from="/" to="/dashboard" />
+                    </Switch>
+                  }
                 </Container>
               </main>
               <AppAside fixed>
