@@ -359,7 +359,7 @@ class Dashboard extends Component {
               <Card className="text-white bg-primary">
                 <CardBody className="pb-0">
 
-                  <div>Available Forms for FYP</div>
+                  <div>Current Projects</div>
                 </CardBody>
                 <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                   <Line data={cardChartData1} options={cardChartOpts1} height={70} />
@@ -375,7 +375,7 @@ class Dashboard extends Component {
               <Card className="text-white bg-warning">
                 <CardBody className="pb-0">
 
-                  <div>Projects given by University</div>
+                  <div>Projects by University</div>
                 </CardBody>
                 <div className="chart-wrapper" style={{ height: '70px' }}>
                   <Line data={cardChartData3} options={cardChartOpts3} height={70} />
@@ -390,7 +390,7 @@ class Dashboard extends Component {
               <Card className="text-white bg-danger">
                 <CardBody className="pb-0">
 
-                  <div>Approved Projects</div>
+                  <div>Sharing</div>
                 </CardBody>
                 <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                   <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
