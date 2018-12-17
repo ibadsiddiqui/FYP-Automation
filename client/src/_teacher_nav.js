@@ -12,12 +12,12 @@ export default {
     },
     {
       name: 'Meeting Minute',
-      url: '/Templates',
+      url: '/MeetingMinutes',
       icon: 'icon-note',
     },
     {
       name: 'Current Projects',
-      url: '/Projects',
+      url: '/CurrentProjects',
       icon: 'icon-screen-desktop',
     },
     {
@@ -27,17 +27,17 @@ export default {
     },
     {
       name: 'Proposal Request',
-      url: '/Templates',
+      url: '/Requests',
       icon: 'icon-bell',
     },
     {
       name: 'University Projects',
-      url: '/Templates',
+      url: '/UniversityProjects',
       icon: 'icon-screen-desktop',
     },
     {
       name: 'Chat',
-      url: '/Templates',
+      url: '/Chat',
       icon: 'icon-speech',
     },
     {
