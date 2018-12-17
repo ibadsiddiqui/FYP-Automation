@@ -18,7 +18,8 @@ import {
 import student_navigation from '../../_student_nav';
 import teacher_navigation from '../../_teacher_nav'
 // routes config
-import routes from '../../student_routes';
+import student_routes from '../../student_routes';
+import teacher_routes from '../../teacher_routes';
 import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
@@ -94,13 +95,23 @@ class DefaultLayout extends React.PureComponent {
                 <AppSidebarMinimizer />
               </AppSidebar>
               <main className="main">
-                <AppBreadcrumb appRoutes={routes} />
+                {
+                  this.state.user.profession == "student"
+                  &&
+                  <AppBreadcrumb appRoutes={student_routes} />
+
+                }
+                {
+                  this.state.user.profession == 'teacher'
+                  &&
+                  <AppBreadcrumb appRoutes={teacher_routes} />
+                }
                 <Container fluid>
                   {
                     this.state.user.profession == 'student'
                     &&
                     <Switch>
-                      {routes.map((route, idx) => {
+                      {student_routes.map((route, idx) => {
                         return route.component ? (
                           <Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
                             <route.component {...props} userDetail={this.state.user} />
@@ -115,7 +126,7 @@ class DefaultLayout extends React.PureComponent {
                     this.state.user.profession == 'teacher'
                     &&
                     <Switch>
-                      {routes.map((route, idx) => {
+                      {teacher_routes.map((route, idx) => {
                         return route.component ? (
                           <Route key={idx} path={route.path} exact={route.exact} name={route.name} render={props => (
                             <route.component {...props} userDetail={this.state.user} />
