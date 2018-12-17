@@ -118,7 +118,7 @@ const Forms = Loadable({
 // });
 
 const Dashboard = Loadable({
-  loader: () => import('./views/Student/Dashboard/Dashboard'),
+  loader: () => import('./views/Teacher/Dashboard'),
   loading: Loading,
 });
 
@@ -158,25 +158,25 @@ const Dashboard = Loadable({
 // });
 
 const Profile = Loadable({
-  loader: () => import('./views/Student/Profile'),
+  loader: () => import('./views/Teacher/Profile'),
   loading: Loading,
 });
 
-const Projects = Loadable({
-  loader: () => import('./views/Student/Projects'),
-  loading: Loading,
-});
+// const Projects = Loadable({
+//   loader: () => import('./views/Teacher/Projects'),
+//   loading: Loading,
+// });
 
 
 const Sharing = Loadable({
-  loader: () => import('./views/Student/Sharing'),
+  loader: () => import('./views/Teacher/Sharing'),
   loading: Loading,
 });
 
-const Templates = Loadable({
-  loader: () => import('./views/Student/FYP_Forms'),
-  loading: Loading,
-});
+// const Templates = Loadable({
+//   loader: () => import('./views/Teacher/FYP_Forms'),
+//   loading: Loading,
+// });
 
 // const Widgets = Loadable({
 //   loader: () => import('./views/Widgets/Widgets'),
@@ -196,13 +196,13 @@ const User = Loadable({
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const routes = [
+const teacher_routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/Profile', exact: true, name: 'Profile', component: Profile },
   { path: '/Sharing', exact: true, name: 'Sharing With Supervisor', component: Sharing },
-  { path: '/Projects', exact: true, name: 'Over All Projects', component: Projects },
-  { path: '/Templates', exact: true, name: 'Templates For FYP', component: Templates },
+  // { path: '/Projects', exact: true, name: 'Over All Projects', component: Projects },
+  // { path: '/Templates', exact: true, name: 'Templates For FYP', component: Templates },
   // { path: '/base', exact: true, name: 'Base', component: Cards },
   // { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/base/forms', name: 'Forms', component: Forms },
@@ -241,4 +241,4 @@ const routes = [
   // { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
 
-export default routes;
+export default teacher_routes;

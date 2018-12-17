@@ -196,7 +196,7 @@ const User = Loadable({
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const routes = [
+const student_routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/Profile', exact: true, name: 'Profile', component: Profile },
@@ -241,4 +241,4 @@ const routes = [
   // { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
 
-export default routes;
+export default student_routes;
