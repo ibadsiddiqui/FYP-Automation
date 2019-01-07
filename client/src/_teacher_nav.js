@@ -11,19 +11,14 @@ export default {
       icon: 'icon-user',
     },
     {
-      name: 'Meeting Minute',
-      url: '/MeetingMinutes',
-      icon: 'icon-note',
-    },
-    {
-      name: 'Current Projects',
-      url: '/CurrentProjects',
-      icon: 'icon-screen-desktop',
-    },
-    {
       name: 'Sharing',
       url: '/Sharing',
       icon: 'icon-share',
+    },
+    {
+      name: 'Meeting Minute',
+      url: '/MeetingMinutes',
+      icon: 'icon-note',
     },
     {
       name: 'Proposal Request',
@@ -31,8 +26,13 @@ export default {
       icon: 'icon-bell',
     },
     {
+      name: 'Current Projects',
+      url: '/CurrentProjects',
+      icon: 'icon-screen-desktop',
+    },
+    {
       name: 'University Projects',
-      url: '/UniversityProjects',
+      url: '/Projects',
       icon: 'icon-screen-desktop',
     },
     {

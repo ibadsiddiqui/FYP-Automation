@@ -46,8 +46,8 @@ class Projects extends Component {
                   <Col xs="4">
                     <ListGroup id="list-tab" role="tablist">
                       <ListGroupItem onClick={() => this.toggle(0)} action active={this.state.activeTab === 0} >DERMEST</ListGroupItem>
-                      <ListGroupItem onClick={() => this.toggle(1)} action active={this.state.activeTab === 1} >Child Tracking Using Smart Watch</ListGroupItem>
-                      <ListGroupItem onClick={() => this.toggle(2)} action active={this.state.activeTab === 2} >Autonomous Self-Driving Car</ListGroupItem>
+                      {/* <ListGroupItem onClick={() => this.toggle(1)} action active={this.state.activeTab === 1} >Child Tracking Using Smart Watch</ListGroupItem> */}
+                      {/* <ListGroupItem onClick={() => this.toggle(2)} action active={this.state.activeTab === 2} >Autonomous Self-Driving Car</ListGroupItem> */}
                     </ListGroup>
                   </Col>
                   <Col xs="8">
