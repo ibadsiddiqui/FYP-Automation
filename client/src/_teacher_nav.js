@@ -40,11 +40,11 @@ export default {
       url: '/Chat',
       icon: 'icon-speech',
     },
-    {
-      name: 'Base',
-      url: '/base',
-      icon: 'icon-puzzle',
-      children: [
+    // {
+      // name: 'Base',
+      // url: '/base',
+      // icon: 'icon-puzzle',
+      // children: [
         //     {
         //       name: 'Breadcrumbs',
         //       url: '/base/breadcrumbs',
@@ -70,11 +70,11 @@ export default {
         //       url: '/base/dropdowns',
         //       icon: 'icon-puzzle',
         //     },
-        {
-          name: 'Forms',
-          url: '/base/forms',
-          icon: 'icon-puzzle',
-        },
+        // {
+        //   name: 'Forms',
+        //   url: '/base/forms',
+        //   icon: 'icon-puzzle',
+        // },
         //     {
         //       name: 'Jumbotrons',
         //       url: '/base/jumbotrons',
@@ -125,8 +125,8 @@ export default {
         //       url: '/base/tooltips',
         //       icon: 'icon-puzzle',
         //     },
-      ],
-    },
+    //   ],
+    // },
     // {
     //   name: 'Buttons',
     //   url: '/buttons',
