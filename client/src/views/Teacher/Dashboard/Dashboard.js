@@ -340,7 +340,7 @@ class Dashboard extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" sm="6" lg="3">
-            <a href="#">
+            <Link to="/MeetingMinutes">
 
               <Card className="text-white bg-info">
                 <CardBody className="pb-0">
@@ -350,11 +350,11 @@ class Dashboard extends Component {
                   <Line data={cardChartData2} options={cardChartOpts2} height={70} />
                 </div>
               </Card>
-            </a>
+            </Link>
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <Link to="/Templates">
+            <Link to="/CurrentProjects">
 
               <Card className="text-white bg-primary">
                 <CardBody className="pb-0">
@@ -370,7 +370,7 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <a href="#">
+            <Link to="/Projects">
 
               <Card className="text-white bg-warning">
                 <CardBody className="pb-0">
@@ -381,11 +381,11 @@ class Dashboard extends Component {
                   <Line data={cardChartData3} options={cardChartOpts3} height={70} />
                 </div>
               </Card>
-            </a>
+            </Link>
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <Link to="/Projects">
+            <Link to="/Sharing">
 
               <Card className="text-white bg-danger">
                 <CardBody className="pb-0">
