@@ -51,7 +51,7 @@ app.post('/checkElgibilityStatus', checkElgibilityStatus)
 
 /////////////////////////////////////////////////////
 
-// authentication work
+// user authentication work
 const LoginAuthController = require('./controllers/Auth/Login')
 const RegisterAuthController = require('./controllers/Auth/Register')
 
@@ -60,18 +60,19 @@ app.post('/register', RegisterAuthController);
 ////////////////////////////////////////////////
 
 
-// getting info using 
+// for auth and profile getting info using 
 const GetUsernameAuthController = require('./controllers/UserInfo/GetDetails')
 app.post('/getusername', GetUsernameAuthController)
 app.get('/getuserinfo', GetUsernameAuthController)
 ///////////////////////////////////////////////////////
 
-// user controllers for updating profile
+// all user controllers for updating profile
 const UpdateUserProfileController = require('./controllers/UserInfo/UpdateUserProfileController')
 app.post('/updateuserprofile', UpdateUserProfileController)
 /////////////////////////////////////////////////////
 
 // project request controllers
+// students
 const checkProjectSubmissionStatus = require('./controllers/Project/checkStatusController')
 const submitProjectController = require('./controllers/Project/submitProposalController')
 const submitProgressController = require('./controllers/Project/submitProgressReportController')
@@ -82,6 +83,15 @@ app.post('/submitProposal', submitProjectController)
 app.post('/submitProgressReport', submitProgressController)
 app.post('/submitFinalReport', submitFinalReportController)
 app.get('/getAllProject', fetchAllProjects)
+
+
+// teachers 
+const getMeetingList = require('./controllers/MeetingMinutes/GetMeetingList')
+const setMeeting = require('./controllers/MeetingMinutes/SetMeeting')
+
+app.get('/getMeetingList', getMeetingList)
+app.post('/setMeeting', setMeeting)
+
 //////////////////////////////////////////////////////////
 
 
