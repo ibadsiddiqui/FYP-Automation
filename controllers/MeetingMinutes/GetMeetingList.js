@@ -6,13 +6,16 @@ module.exports = async (req, res) => {
     const username = decodedJWT(req.headers.authorization)
 
     if(username){
-        const list = await MeetingMinutes.getMeetingList(username)
-        if(!list){
-            res.status(200).send({list: []})
-        }else {
-            res.status(200).send({list: list})
+        await MeetingMinutes.getMeetingList(username, (err, list) => {
+            if(err) throw err;
+            if(!list){
+                res.status(200).send({list: []})
+            }else {
+                res.status(200).send({list: list})
+    
+            }
 
-        }
+        })
     }
 
 }
