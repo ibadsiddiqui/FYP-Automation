@@ -20,13 +20,9 @@ class MeetingMinutes extends React.Component {
         this.toggleSuccessModal = this.toggleSuccessModal.bind(this)
         this.state = {
             successModal: false,
-            list: [{
-                "meetingNumber": '#100123',
-                "meetingTopic": '#100123',
-                'meetingWith': '001-2014',
-                'meetingDate': new Date().toLocaleDateString(),
+            list: [
 
-            }],
+            ],
             correctInput: true,
         }
         this.meetingTopic = "";
@@ -56,7 +52,7 @@ class MeetingMinutes extends React.Component {
                             </div>
 
 
-                            <div className="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Enter Targetted Date" style={{marginLeft: 5 + 'px'}}>
+                            <div className="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Enter Targetted Date" style={{ marginLeft: 5 + 'px' }}>
                                 <span className="label-input100">Meeting Date: *</span>
                                 <input className="input100" type="date" name="expected_date" placeholder="Enter Date: " onChange={event => this.meetingDate = event.target.value} />
                             </div>
@@ -76,14 +72,37 @@ class MeetingMinutes extends React.Component {
             </div>
         )
 
+        this.fetchList()
     }
 
+    componentDidMount() {
+        this.fetchMeetingList = setInterval(this.fetchList, 1000);
+    }
+    componentWillUnmount() {
+        clearInterval(this.fetchMeetingList)
+    }
+    fetchList() {
+        fetch('/getMeetingList', {
+            method: "GET",
+            headers: {
+                "Authorization": localStorage.getItem('token'),
+                // "Accept": "application/json",
+            },
+        }).then(res => res.json())
+            .then(res => {
+                this.setState({
+                    list: [...res.list.Meetings]
+                })
+                console.log(this.state.list)
+            })
+    }
     guidGenerator() {
         var S4 = function () {
             return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
         };
         return (S4() + S4());
     }
+
     submitForm(ev) {
         ev.preventDefault();
 
@@ -98,7 +117,7 @@ class MeetingMinutes extends React.Component {
         list.push(meetingDetails)
         if (this.meetingTopic && this.meetingWith && this.meetingDate) {
             this.setState({ list })
-
+            this.submitMeeting()
             this.toggleSuccessModal()
         } else {
             this.setState({
@@ -106,11 +125,31 @@ class MeetingMinutes extends React.Component {
             })
         }
     }
+
     toggleSuccessModal() {
         this.setState({
             successModal: !this.state.successModal
         })
     }
+
+    submitMeeting() {
+        fetch('/setMeeting', {
+            method: "POST",
+            headers: {
+                "Authorization": localStorage.getItem('token'),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "meetingNumber": this.guidGenerator(),
+                "meetingTopic": this.meetingTopic,
+                'meetingWith': this.meetingWith,
+                'meetingDate': this.meetingDate
+
+            })
+        }).then(res => res.json())
+            .then(res => this.setState({ list: [...res.list.Meetings] }))
+    }
+
     showCreateMeetingForm() {
         return (
             <Modal isOpen={this.state.successModal} toggle={this.toggleSuccessModal} className={'modal-success'}>
@@ -121,6 +160,7 @@ class MeetingMinutes extends React.Component {
             </Modal>
         )
     }
+
     render() {
         return (
             <div className="animated fadeIn">
@@ -145,14 +185,15 @@ class MeetingMinutes extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.list.map((item, index) => (
-                                            <tr key={index}>
-                                                <td>{item.meetingNumber}</td>
-                                                <td>{item.meetingTopic}</td>
-                                                <td>{item.meetingWith}</td>
-                                                <td>{item.meetingDate}</td>
-                                            </tr>
-                                        ))}
+                                        {
+                                            this.state.list.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>{item.meetingNumber}</td>
+                                                    <td>{item.meetingTopic}</td>
+                                                    <td>{item.meetingWith}</td>
+                                                    <td>{item.meetingDate}</td>
+                                                </tr>
+                                            ))}
                                     </tbody>
                                 </Table>
                             </CardBody>
