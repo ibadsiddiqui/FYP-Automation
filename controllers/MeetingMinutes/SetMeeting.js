@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
                         details.Meetings.push(model);
                         details.save();
-                        res.status(200).send(details)
+                        res.status(200).send({state: true})
 
                     } else if (details === null || details === undefined) {
 
@@ -32,11 +32,11 @@ module.exports = async (req, res) => {
                             _id: username,
                             Meetings: [model]
                         }
-                        
+
                         MeetingMinutes.createMeeting(meetingModel, (err, newMeeting) => {
                             if (err) throw err;
                             if (!newMeeting) {
-                                res.status(200).send(true)
+                                res.status(200).send({state: true})
                             }
                         })
                     }
