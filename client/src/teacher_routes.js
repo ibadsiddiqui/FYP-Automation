@@ -27,6 +27,11 @@ const Profile = Loadable({
   loading: Loading,
 });
 
+const ProposalRequest = Loadable({
+  loader: () => import('./views/Teacher/Proposal_Request'),
+  loading: Loading,
+})
+
 const Projects = Loadable({
   loader: () => import('./views/Teacher/University_Projects'),
   loading: Loading,
@@ -53,8 +58,8 @@ const teacher_routes = [
   { path: '/Sharing', exact: true, name: 'Sharing With Supervisor', component: Sharing },
   { path: '/Projects', exact: true, name: 'Over All Projects', component: Projects },
   { path: '/MeetingMinutes', exact: true, name: 'Templates For FYP', component: MeetingMinutes },
-  { path: '/CurrentProjects', exact: true, name: 'Base', component: Current_Projects },
-  // { path: '/base/cards', name: 'Cards', component: Cards },
+  { path: '/CurrentProjects', exact: true, name: 'Current Projects', component: Current_Projects },
+  { path: '/ProposalRequest', name: 'Request', component: ProposalRequest },
   { path: '/base/forms', name: 'Forms', component: Forms },
   // { path: '/base/switches', name: 'Switches', component: Switches },
   // { path: '/base/tables', name: 'Tables', component: Tables },
