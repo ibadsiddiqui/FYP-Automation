@@ -78,12 +78,14 @@ const submitProjectController = require('./controllers/Project/submitProposalCon
 const submitProgressController = require('./controllers/Project/submitProgressReportController')
 const submitFinalReportController = require('./controllers/Project/submitFinalReportController')
 const fetchAllProjects = require('./controllers/Project/ListOfProjectController')
+const getTeachersList = require('./controllers/Teachers/GetTeachersList') 
+
 app.get('/checkStatus', checkProjectSubmissionStatus)
 app.post('/submitProposal', submitProjectController)
 app.post('/submitProgressReport', submitProgressController)
 app.post('/submitFinalReport', submitFinalReportController)
 app.get('/getAllProject', fetchAllProjects)
-
+app.get('/getTeachersList', getTeachersList)
 
 // teachers 
 const getMeetingList = require('./controllers/MeetingMinutes/GetMeetingList')
