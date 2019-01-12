@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
             "student_id" : req.body.student_id,
             "project_name": req.body.project_name,
             "project_abstract": req.body.project_abstract,
+            "student_name" : req.body.student_name
         } 
 
         await RequestModel.sendProposalRequest(username, model, (err, requests) => {
