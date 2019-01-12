@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     const project_name = req.body.project_name;
     const student_year_session = req.body.student_year_session;
     const student_enrollment_year = req.body.student_enrollment_year;
-    const student_CMS_ID = req.body.student_CMS_ID;
+    const student_CMS_ID = username;
     const supervisor_fullname = req.body.supervisor_fullname;
     const supervisor_designation = req.body.supervisor_designation;
     const co_supervisor_fullname = req.body.co_supervisor_fullname

@@ -14,6 +14,7 @@ module.exports = async (request, response) => {
                         hasProposalBeenAccepted: user.hasProposalBeenAccepted,
                         hasSubmittedProgressReport: user.hasSubmittedProgressReport,
                         hasSubmittedFinalReport: user.hasSubmittedFinalReport,
+                        hasProposalBeenAcceptedBySupervisor: user.hasProposalBeenAcceptedBySupervisor
                     })
                 }
                 else if (!user.hasSubmittedProposal) {
@@ -22,6 +23,7 @@ module.exports = async (request, response) => {
                         hasProposalBeenAccepted: user.hasProposalBeenAccepted,
                         hasSubmittedProgressReport: user.hasSubmittedProgressReport,
                         hasSubmittedFinalReport: user.hasSubmittedFinalReport,
+                        hasProposalBeenAcceptedBySupervisor: user.hasProposalBeenAcceptedBySupervisor
                     })
                 }
             } else {

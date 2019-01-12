@@ -20,7 +20,6 @@ export default class ProposalForm extends Component {
             program_of_study: '',
             student_year_session: '',
             student_enrollment_year: '',
-            student_CMS_ID: '',
             project_name: '',
             abstract: '',
             problem_statement: '',
@@ -61,7 +60,7 @@ export default class ProposalForm extends Component {
     componentDidMount() {
         this.getList()
     }
-  
+
     setProgramOfStudy(event) {
         this.setState({
             program_of_study: event.target.value
@@ -80,11 +79,6 @@ export default class ProposalForm extends Component {
         })
     }
 
-    setStudentCMSID(event) {
-        this.setState({
-            student_CMS_ID: event.target.value
-        })
-    }
 
     setProjectName(event) {
         this.setState({
@@ -162,25 +156,25 @@ export default class ProposalForm extends Component {
     async setSupervisorName(event) {
         await this.setState({
             supervisor_fullname: event.target.value,
-            
+
         });
         this.checkSupervisor()
     }
-    checkSupervisor(){
-        if(this.state.supervisor_fullname === ''){
+    checkSupervisor() {
+        if (this.state.supervisor_fullname === '') {
             this.setState({
                 supervisorNotFound: false
 
             })
             return;
-        }else {
+        } else {
 
             this.state.teachersList.map((teacher) => {
-                if(teacher.name.toLowerCase() == this.state.supervisor_fullname.toLowerCase()) {
+                if (teacher.name.toLowerCase() == this.state.supervisor_fullname.toLowerCase()) {
                     this.setState({
                         supervisorNotFound: false
                     })
-                }else {
+                } else {
                     this.setState({
                         supervisorNotFound: true
                     })
@@ -216,7 +210,7 @@ export default class ProposalForm extends Component {
 
     onSubmit() {
         if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
-            && this.state.student_CMS_ID && this.state.project_name && this.state.problem_statement
+             && this.state.project_name && this.state.problem_statement
             && this.state.motivation && this.state.objective && this.state.literature_review
             && this.state.scope && this.state.useCaseDiagram && this.state.methodology
             && this.state.raciChart && this.state.supervisor_designation && this.state.supervisor_fullname) {
@@ -288,13 +282,6 @@ export default class ProposalForm extends Component {
                             <Input type="text" value={this.state.project_name} id="projectName" placeholder="Enter Your Project Name" onChange={(event) => this.setProjectName(event)} />
                         </FormGroup>
 
-                        <strong>Students Details</strong>
-
-                        <FormGroup>
-                            <small htmlFor="postal-code">CMS ID</small>
-                            <Input type="text" value={this.state.student_CMS_ID} id="postal-code" placeholder="Enter your CMS ID" onChange={(event) => this.setStudentCMSID(event)} />
-                        </FormGroup>
-
                         <strong>Project Details</strong>
                         <FormGroup>
                             <small htmlFor="abstract">Project Abstract</small>
@@ -361,11 +348,11 @@ export default class ProposalForm extends Component {
                             <Col xs="6">
                                 <FormGroup>
                                     <small htmlFor="supervisorName">
-                                        Supervisor Name 
+                                        Supervisor Name
                                         {
                                             this.state.supervisorNotFound &&
 
-                                            <small className="text-danger" style={{marginLeft: 15 + 'px'}}>Not Found</small>
+                                            <small className="text-danger" style={{ marginLeft: 15 + 'px' }}>Not Found</small>
                                         }
                                     </small>
                                     <Input type="text" value={this.state.supervisor_fullname} id="supervisorName" placeholder="Enter your supervisor's full name" onChange={(event) => this.setSupervisorName(event)} />
@@ -387,9 +374,9 @@ export default class ProposalForm extends Component {
                                         {
                                             this.state.coSupervisorNotFound &&
 
-                                            <small className="text-danger" style={{marginLeft: 15 + 'px'}}>Not Found</small>
+                                            <small className="text-danger" style={{ marginLeft: 15 + 'px' }}>Not Found</small>
                                         }
-                                        </small>
+                                    </small>
                                     <Input type="text" value={this.state.co_supervisor_fullname} id="co-supervisorName" placeholder="Enter your co-supervisor's full name" onChange={(event) => this.setCoSupervisorName(event)} />
                                 </FormGroup>
                             </Col>
@@ -422,7 +409,13 @@ export default class ProposalForm extends Component {
                     </CardFooter>
                 </Card>
             );
-        } else if (this.props.proposalStatus && !this.state.onSubmitClick) {
+        } else if (this.props.proposalStatus && !this.props.hasProposalBeenAcceptedBySupervisor) {
+            return (
+                <strong>Wait while supervisor accepts your proposal request for project. </strong>
+
+            )
+        }
+        else if (this.props.proposalStatus && !this.state.onSubmitClick) {
             return (
                 <strong>You have submitted your  proposal for the Project. Now wait while the committee accepts your project. </strong>
             )
