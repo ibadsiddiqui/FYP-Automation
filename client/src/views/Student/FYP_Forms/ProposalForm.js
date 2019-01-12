@@ -37,10 +37,31 @@ export default class ProposalForm extends Component {
             co_supervisor_designation: '',
             external_supervisor_fullname: '',
             external_supervisor_designation: '',
+            supervisorNotFound: false,
+            teachersList: [],
+            coSupervisorNotFound: false,
         }
     }
 
+    getList() {
+        fetch('/getTeachersList', {
+            method: "GET",
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
+        }).then(res => res.json())
+            .then(res => {
 
+                this.setState({
+                    teachersList: [...res]
+                })
+                console.log(this.state.teachersList)
+            })
+    }
+    componentDidMount() {
+        this.getList()
+    }
+  
     setProgramOfStudy(event) {
         this.setState({
             program_of_study: event.target.value
@@ -52,11 +73,13 @@ export default class ProposalForm extends Component {
             student_enrollment_year: event.target.value
         })
     }
+
     setStudentYearSession(event) {
         this.setState({
             student_year_session: event.target.value
         })
     }
+
     setStudentCMSID(event) {
         this.setState({
             student_CMS_ID: event.target.value
@@ -68,36 +91,43 @@ export default class ProposalForm extends Component {
             project_name: event.target.value
         })
     }
+
     setProjectAbstract(event) {
         this.setState({
             abstract: event.target.value
         })
     }
+
     setProblemStatement(event) {
         this.setState({
             problem_statement: event.target.value
         })
     }
+
     setMotivation(event) {
         this.setState({
             motivation: event.target.value
         })
     }
+
     setObjective(event) {
         this.setState({
             objective: event.target.value
         })
     }
+
     setLiteratureReview(event) {
         this.setState({
             literature_review: event.target.value
         })
     }
+
     setScope(event) {
         this.setState({
             scope: event.target.value
         })
     }
+
     handleMethodology(event) {
         this.setState({
             methodology: event.target.value
@@ -129,10 +159,34 @@ export default class ProposalForm extends Component {
         }, 500)
     }
 
-    setSupervisorName(event) {
-        this.setState({
-            supervisor_fullname: event.target.value
-        })
+    async setSupervisorName(event) {
+        await this.setState({
+            supervisor_fullname: event.target.value,
+            
+        });
+        this.checkSupervisor()
+    }
+    checkSupervisor(){
+        if(this.state.supervisor_fullname === ''){
+            this.setState({
+                supervisorNotFound: false
+
+            })
+            return;
+        }else {
+
+            this.state.teachersList.map((teacher) => {
+                if(teacher.name.toLowerCase() == this.state.supervisor_fullname.toLowerCase()) {
+                    this.setState({
+                        supervisorNotFound: false
+                    })
+                }else {
+                    this.setState({
+                        supervisorNotFound: true
+                    })
+                }
+            })
+        }
     }
     setSupervisorDesignation(event) {
         this.setState({
@@ -178,11 +232,11 @@ export default class ProposalForm extends Component {
             }
             ).then(res => res.json())
                 .then((response) => {
-                    if(response.status === 'submitted'){
+                    if (response.status === 'submitted') {
 
                         this.props.modal()
                         setTimeout(() => {
-                            
+
                             this.setState({
                                 onSubmitClick: true
                             })
@@ -306,7 +360,14 @@ export default class ProposalForm extends Component {
                         <FormGroup row className="my-0">
                             <Col xs="6">
                                 <FormGroup>
-                                    <small htmlFor="supervisorName">Supervisor Name</small>
+                                    <small htmlFor="supervisorName">
+                                        Supervisor Name 
+                                        {
+                                            this.state.supervisorNotFound &&
+
+                                            <small className="text-danger" style={{marginLeft: 15 + 'px'}}>Not Found</small>
+                                        }
+                                    </small>
                                     <Input type="text" value={this.state.supervisor_fullname} id="supervisorName" placeholder="Enter your supervisor's full name" onChange={(event) => this.setSupervisorName(event)} />
                                 </FormGroup>
                             </Col>
@@ -321,7 +382,14 @@ export default class ProposalForm extends Component {
                         <FormGroup row className="my-0">
                             <Col xs="6">
                                 <FormGroup>
-                                    <small htmlFor="co-supervisorName">Co-Supervisor Name</small>
+                                    <small htmlFor="co-supervisorName">
+                                        Co-Supervisor Name
+                                        {
+                                            this.state.coSupervisorNotFound &&
+
+                                            <small className="text-danger" style={{marginLeft: 15 + 'px'}}>Not Found</small>
+                                        }
+                                        </small>
                                     <Input type="text" value={this.state.co_supervisor_fullname} id="co-supervisorName" placeholder="Enter your co-supervisor's full name" onChange={(event) => this.setCoSupervisorName(event)} />
                                 </FormGroup>
                             </Col>
@@ -354,7 +422,7 @@ export default class ProposalForm extends Component {
                     </CardFooter>
                 </Card>
             );
-        } else if (this.props.proposalStatus && !this.state.onSubmitClick ) {
+        } else if (this.props.proposalStatus && !this.state.onSubmitClick) {
             return (
                 <strong>You have submitted your  proposal for the Project. Now wait while the committee accepts your project. </strong>
             )
