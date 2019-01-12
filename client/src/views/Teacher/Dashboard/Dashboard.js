@@ -301,25 +301,6 @@ class Dashboard extends Component {
     };
   }
   componentWillMount() {
-    // fetch('/login', {
-    //   method: "POST", // *GET, POST, PUT, DELETE, etc.
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username: this.state.username,
-    //     password: event.target.value,
-    //   }),
-    // })
-    //   .then(async res => await res.json())
-    //   .then(res => {
-    //     this.setState({
-    //       auth: res.auth,
-    //       token: res.token,
-    //       doesUserNameExist: true,
-    //     })
-    //   });
   }
 
   toggle() {
