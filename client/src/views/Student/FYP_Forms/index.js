@@ -128,7 +128,8 @@ export default class Templates extends Component {
                         hasSubmittedProposal: response.hasSubmittedProposal,
                         hasProposalBeenAccepted: response.hasProposalBeenAccepted,
                         hasSubmittedProgressReport: response.hasSubmittedProgressReport,
-                        hasSubmittedFinalReport: response.hasSubmittedProgressReport
+                        hasSubmittedFinalReport: response.hasSubmittedProgressReport,
+                        hasProposalBeenAcceptedBySupervisor: response.hasProposalBeenAcceptedBySupervisor
                     })
                 })
         }
