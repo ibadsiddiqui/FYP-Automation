@@ -182,6 +182,7 @@ export default class Templates extends Component {
         )
     }
 
+
     render() {
         if (this.state.redirect === false) {
 
@@ -204,7 +205,7 @@ export default class Templates extends Component {
                                                 <ListGroupItem onClick={() => this.toggle(1)} action active={this.state.activeTab === 1} >Project Proposal - Report Document and Presentation</ListGroupItem>
 
                                                 {
-                                                    this.state.hasProposalBeenAccepted === true && hasProposalBeenAcceptedBySupervisor
+                                                    this.state.hasProposalBeenAccepted === true && this.state.hasProposalBeenAcceptedBySupervisor
                                                     &&
                                                     <span>
 

@@ -15,6 +15,7 @@ export default class ProposalForm extends Component {
 
     constructor(props) {
         super(props);
+        this.sendRequest = this.sendRequest.bind(this)
         this.state = {
             onSubmitClick: false,
             program_of_study: '',
@@ -208,9 +209,27 @@ export default class ProposalForm extends Component {
         })
     }
 
+    sendRequest() {
+        fetch('/sendRequest', {
+            method: "POST",
+            headers: {
+                // "Authorization": localStorage.get('token'),
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                "supervisorName": this.state.supervisor_fullname,
+                "student_id": localStorage.getItem('token'),
+                "project_name": this.state.project_name,
+                "project_abstract": this.state.abstract
+
+            })
+        }).then(res => res.json())
+            .then(res => console.log(res))
+    }
     onSubmit() {
+
         if (this.state.program_of_study && this.state.student_year_session && this.state.student_enrollment_year
-             && this.state.project_name && this.state.problem_statement
+            && this.state.project_name && this.state.problem_statement
             && this.state.motivation && this.state.objective && this.state.literature_review
             && this.state.scope && this.state.useCaseDiagram && this.state.methodology
             && this.state.raciChart && this.state.supervisor_designation && this.state.supervisor_fullname) {
@@ -229,6 +248,7 @@ export default class ProposalForm extends Component {
                     if (response.status === 'submitted') {
 
                         this.props.modal()
+                        this.sendRequest()
                         setTimeout(() => {
 
                             this.setState({
