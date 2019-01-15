@@ -332,7 +332,7 @@ class Register extends Component {
                       && this.state.isPasswordValid === true
                       && this.state.confirmPassword === true
                       && !this.state.doesUserNameExist
-                      && this.state.status === 'accepted'
+                      && (this.state.status === 'accepted' ||  this.state.profession.toLowerCase() === "teacher")
                       &&
                       <Link to="/login">
                         <Button color="success" block onClick={this.onRegister}>Create Account</Button>
