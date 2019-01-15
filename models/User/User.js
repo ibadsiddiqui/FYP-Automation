@@ -30,6 +30,10 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    hasProposalBeenAcceptedBySupervisor: {
+        type: Boolean,
+        default: false
+    },
     hasSubmittedProgressReport: {
         type: Boolean,
         default: false

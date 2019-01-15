@@ -79,6 +79,7 @@ const submitProgressController = require('./controllers/Project/submitProgressRe
 const submitFinalReportController = require('./controllers/Project/submitFinalReportController')
 const fetchAllProjects = require('./controllers/Project/ListOfProjectController')
 const getTeachersList = require('./controllers/Teachers/GetTeachersList') 
+const sendRequest = require('./controllers/Project/sendRequest')
 
 app.get('/checkStatus', checkProjectSubmissionStatus)
 app.post('/submitProposal', submitProjectController)
@@ -86,10 +87,13 @@ app.post('/submitProgressReport', submitProgressController)
 app.post('/submitFinalReport', submitFinalReportController)
 app.get('/getAllProject', fetchAllProjects)
 app.get('/getTeachersList', getTeachersList)
+app.post('/sendRequest', sendRequest)
 
 // teachers 
 const getMeetingList = require('./controllers/MeetingMinutes/GetMeetingList')
 const setMeeting = require('./controllers/MeetingMinutes/SetMeeting')
+const getRequestList = require('./controllers/Project/getRequestList')
+app.get('/getRequestList', getRequestList)
 
 app.get('/getMeetingList', getMeetingList)
 app.post('/setMeeting', setMeeting)

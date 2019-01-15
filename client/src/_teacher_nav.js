@@ -22,7 +22,7 @@ export default {
     },
     {
       name: 'Proposal Request',
-      url: '/Requests',
+      url: '/ProposalRequest',
       icon: 'icon-bell',
     },
     {
