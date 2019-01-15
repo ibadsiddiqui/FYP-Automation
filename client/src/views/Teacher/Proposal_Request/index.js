@@ -21,7 +21,7 @@ export default class ProposalRequest extends Component {
     }
   }
 
-  componentWillMount() {
+  fetchList() {
     fetch('/getRequestList', {
       method: 'GET',
       headers: {
@@ -31,10 +31,34 @@ export default class ProposalRequest extends Component {
       .then(res => res.json())
       .then(async response => {
         await this.setState({
-          requestList: [...response.request_from]
+          requestList: [...response.request_from.reverse()]
         })
-        console.log(this.state.requestList)
       })
+
+  }
+  componentDidMount() {
+    // this.timerList = setInterval(this.fetchList(), 1000);
+    this.fetchList()
+  }
+  accept(text) {
+    const name = text
+
+    fetch('/acceptRequest', {
+      method: 'POST',
+      headers: {
+        "Authorization": localStorage.getItem('token'),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "student_name": name
+      })
+    })
+    // .then(res => res.json())
+    // .then(async response => {
+    //   // await this.setState({
+    //     requestList: [...response.request_from]
+    //   })
+    // })
   }
   render() {
     return (
@@ -51,11 +75,11 @@ export default class ProposalRequest extends Component {
                     <ListGroup id="list-tab" role="tablist">
                       {
                         this.state.requestList.map((request, index) => {
-                          return (
-                            <ListGroupItem onClick={() => this.toggle(index)} action active={this.state.activeTab === index} >{
-                              request.student_name}</ListGroupItem>
-
-                          )
+                            return (
+                              <ListGroupItem key={index} onClick={() => this.toggle(index)} action active={this.state.activeTab === index} >
+                                {request.student_name}
+                              </ListGroupItem>
+                            )
                         })
                       }
                     </ListGroup>
@@ -74,10 +98,20 @@ export default class ProposalRequest extends Component {
                                 <strong>Abstract - {request.project_name}</strong>
                               </p>
                               <p>{request.project_abstract}</p>
-                              <div className="row" style={{ justifyContent: 'center',}}>
 
-                                <button className="btn btn-small btn-primary" style={{marginRight: 5 + 'px'}}>Accept</button>
-                                <button className="btn btn-small btn-danger">Reject</button>
+                              <div className="row" style={{ justifyContent: 'center', }}>
+                                {
+
+                                  request.accepted === false
+                                  &&
+
+                                  <button className="btn btn-small btn-primary" style={{ marginRight: 5 + 'px' }} onClick={() => this.accept(request.student_name)}>Accept</button>
+                                }
+                                {
+                                  request.accepted === false
+                                  &&
+                                  <button className="btn btn-small btn-danger">Reject</button>
+                                }
                               </div>
                             </TabPane>
 
