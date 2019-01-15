@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 // User Schema
 const ProposalRequest = mongoose.Schema({
-    
+
     supervisorName: {
         type: String
     },
@@ -21,6 +21,27 @@ module.exports.getProposalRequest = function (id, callback) {
     const query = { supervisorName: id }
     ProposalRequests.findOne(query, callback);
 }
+
+module.exports.acceptProposalRequest = function (id, student_name, callback) {
+    const query = { supervisorName: id }
+    ProposalRequests.findOne(query, async (err, requestReceived) => {
+        if (err) throw (err);
+        if (requestReceived) {
+
+            await ProposalRequests.updateOne({
+                _id: requestReceived._id,
+                request_from: { $elemMatch: { student_name: student_name } }
+            }, {
+                    $set: {
+                        "request_from.$.accepted": true
+                    }
+                },
+            callback)
+        }
+    });
+}
+
+
 module.exports.sendProposalRequest = function (id, model, callback) {
     const query = { supervisorName: id }
 
