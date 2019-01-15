@@ -10,13 +10,25 @@ module.exports = async (req, res) => {
         await User.getUserByUsername(username, async (err, user) => {
             if (err) throw err;
             if (user) {
-                await Request.acceptProposalRequest(user.name.toLowerCase(), student_name, (err, status) => {
+                await Request.acceptProposalRequest( user.name.toLowerCase(), student_name, async (err, status) => {
                     if (err) throw err;
-                    if (status) {
-                        res.status(200).send({ status: status.ok })
+                    if (status.ok) {
+                        await User.findOne({ name: student_name }, (err, student) => {
+                            if (err) throw err;
+                            if (student) {
+                                student.hasProposalBeenAcceptedBySupervisor = true
+                                student.save((err, saved) => {
+                                    if (err) throw err;
+                                    if (saved) {
+                                        res.status(200).send('success')
+                                    }
+                                })
+                            }
+                        })
                     }
                 })
             }
         })
     }
+
 }
