@@ -17,7 +17,7 @@ class Sharing extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Combined All Table
+                <i className="fa fa-align-justify"></i> Share
               </CardHeader>
               <CardBody>
                 <Table hover bordered striped responsive size="sm">
