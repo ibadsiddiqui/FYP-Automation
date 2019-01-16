@@ -279,76 +279,91 @@ export default class ProposalForm extends Component {
                     <CardBody>
                         <strong> This form should be filled carefully because, it will only be available if the project gets rejected</strong>
                         <FormGroup>
-                            <small htmlFor="programName">Program of Study</small>
-                            <Input type="text" defaultValue={this.state.program_of_study} id="programName" onChange={(event) => this.setProgramOfStudy(event)} placeholder="Enter your program of study" />
+                            {this.state.program_of_study.length === 20 ? (
+                            <small style={{color: "red"}} htmlFor="programName">Program of Study - Too Long</small>):(
+                                <small htmlFor="programName">Program of Study</small>
+                            )}
+                            <Input require={require} type="text" maxLength = "20" defaultValue={this.state.program_of_study} id="programName" onChange={(event) => this.setProgramOfStudy(event)} placeholder="Enter your program of study" />
                         </FormGroup>
                         <FormGroup row className="my-0">
                             <Col xs="6">
                                 <FormGroup>
-                                    <small htmlFor="city">Year Session</small>
-                                    <Input type="text" defaultValue={this.state.student_year_session} id="yearSession" placeholder="Enter your session: Fall or Spring" onChange={(event) => this.setStudentYearSession(event)} />
+                                    {this.state.student_year_session.length >= 7 ? (
+                            <small style={{color: "red"}} htmlFor="programName">year of session - Too Long</small>):(
+                                <small htmlFor="programName">Year of session</small>
+                            )}
+                                    <Input require={require} maxLength="8" type="text" defaultValue={this.state.student_year_session} id="yearSession" placeholder="Enter your session: Fall or Spring" onChange={(event) => this.setStudentYearSession(event)} />
                                 </FormGroup>
                             </Col>
                             <Col xs="6">
                                 <FormGroup>
-                                    <small htmlFor="postal-code">Enrollment Year</small>
-                                    <Input type="text" value={this.state.student_enrollment_year} id="postal-code" placeholder="Enter your year of Enrollment" onChange={(event) => this.setStudentEnrollmentYear(event)} />
+                                    {this.state.student_enrollment_year.length === 5 ? (
+                            <small style={{color: "red"}} htmlFor="programName">Enrollment Year - Too Long</small>):(
+                                <small htmlFor="programName">Enrollment Year</small>
+                            )}
+                                    <Input type="text" require={require} maxLength="6" value={this.state.student_enrollment_year} id="postal-code" placeholder="Enter your year of Enrollment" onChange={(event) => this.setStudentEnrollmentYear(event)} />
                                 </FormGroup>
                             </Col>
                         </FormGroup>
 
                         <FormGroup>
-                            <small htmlFor="street">Project Name</small>
-                            <Input type="text" value={this.state.project_name} id="projectName" placeholder="Enter Your Project Name" onChange={(event) => this.setProjectName(event)} />
+                            {this.state.project_name.length === 40 ? (
+                            <small style={{color: "red"}} htmlFor="programName">Project Name - Too Long</small>):(
+                                <small htmlFor="programName">Project Name</small>
+                            )}
+                            <Input type="text" require={require} maxLength="40" value={this.state.project_name} id="projectName" placeholder="Enter Your Project Name" onChange={(event) => this.setProjectName(event)} />
                         </FormGroup>
 
-                        <strong>Project Details</strong>
+                        <strong>Project Details</strong> Not acceptable more than 200 characters
                         <FormGroup>
-                            <small htmlFor="abstract">Project Abstract</small>
+                            {this.state.abstract.length === 200 ? (
+                            <small style={{color: "red"}} htmlFor="programName">Abstract - Too Long</small>):(
+                                <small htmlFor="programName">Abstract</small>
+                            )}
                             <div className="form-group">
-                                <textarea className="form-control" value={this.state.abstract} id="abstract" rows="10" placeholder="Enter your abstract for project" onChange={(event) => this.setProjectAbstract(event)}></textarea>
+                                <textarea require={require} maxLength = "200" className="form-control" value={this.state.abstract} id="abstract" rows="10" placeholder="Enter your abstract for project" onChange={(event) => this.setProjectAbstract(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
-                            <small htmlFor="problemStatement">Problem Statement</small>
+                            <small htmlFor="problemStatement">Problem Statement:        Not acceptable more than 200 characters</small>
                             <div className="form-group">
-                                <textarea className="form-control" value={this.state.problem_statement} id="problemStatement" rows="10" placeholder="Enter your project's problem statement" onChange={(event) => this.setProblemStatement(event)}></textarea>
+                                <textarea require={require} maxLength = "200" className="form-control" value={this.state.problem_statement} id="problemStatement" rows="10" placeholder="Enter your project's problem statement" onChange={(event) => this.setProblemStatement(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
-                            <small htmlFor="motivation">Motivation</small>
+                            <small htmlFor="motivation">Motivation:         Not acceptable more than 200 characters</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="motivation" rows="10" value={this.state.motivation} placeholder="Enter your motivation for the project" onChange={(event) => this.setMotivation(event)}></textarea>
+                                <textarea require={require} maxLength = "200" className="form-control" id="motivation" rows="10" value={this.state.motivation} placeholder="Enter your motivation for the project" onChange={(event) => this.setMotivation(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
-                            <small htmlFor="objective">Objective</small>
+                            <small htmlFor="objective">Objective:       Not acceptable more than 200 characters</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="objective" rows="10" value={this.state.objective} placeholder="Enter your objectives of project" onChange={(event) => this.setObjective(event)}></textarea>
+                                <textarea require={require} maxLength = "200" className="form-control" id="objective" rows="10" value={this.state.objective} placeholder="Enter your objectives of project" onChange={(event) => this.setObjective(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
-                            <small htmlFor="literatureReview">Literature Review</small>
+                            <small htmlFor="literatureReview">Literature Review:            Not acceptable more than 200 characters</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="literatureReview" rows="10" value={this.state.literature_review} placeholder="Enter your literature review on project" onChange={(event) => this.setLiteratureReview(event)}></textarea>
+                                <textarea require={require} maxLength = "200" className="form-control" id="literatureReview" rows="10" value={this.state.literature_review} placeholder="Enter your literature review on project" onChange={(event) => this.setLiteratureReview(event)}></textarea>
                             </div>
                         </FormGroup>
                         <FormGroup>
-                            <small htmlFor="scope">Scope of the Project</small>
+                            <small htmlFor="scope">Scope of the Project:        Not acceptable more than 200 characters</small>
                             <div className="form-group">
-                                <textarea className="form-control" id="scope" rows="10" value={this.state.scope} placeholder="Enter your scope of the project" onChange={(event) => this.setScope(event)}></textarea>
+                                <textarea require={require} maxLength = "200" className="form-control" id="scope" rows="10" value={this.state.scope} placeholder="Enter your scope of the project" onChange={(event) => this.setScope(event)}></textarea>
                             </div>
                             <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
-                                <span className="label-input100">Upload Use Case or Process Flow Diagram:</span>
+                                <span className="label-input100">Upload Use Case or Process Flow Diagram:           Not acceptable more than 200 characters</span>
                                 <div className="col-xs-3">
-                                    <input type="file" name="usecaseORprocessflow" accept="image/*" onChange={(file) => this.uploadUserCase(file)} />
+                                    <input type="file" require={require} name="usecaseORprocessflow" accept="image/*" onChange={(file) => this.uploadUserCase(file)} />
                                 </div>
                             </div>
 
                         </FormGroup>
                         <FormGroup>
-                            <small htmlFor="methodology">Select Methodology</small>
-                            <Input type="select" name="methodology" value={this.state.methodology} id="methodology" onChange={this.handleMethodology.bind(this)}>
+                            <small htmlFor="methodology">Select Methodology:</small>
+                            <Input require={require} type="select" name="methodology" value={this.state.methodology} id="methodology" onChange={this.handleMethodology.bind(this)}>
                                 <option value="Agile" >Agile</option>
                                 <option value="Waterfall">Waterfall</option>
                                 <option value="Evolutionary Prototype">Evolutionary Prototype</option>
@@ -359,7 +374,7 @@ export default class ProposalForm extends Component {
                             <div className="wrap-input100 validate-input bg1 rs1-wrap-input100">
                                 <span className="label-input100">Upload RACI Chart Diagram:</span>
                                 <div className="col-xs-3">
-                                    <input type="file" name="RACIchart" accept="image/*" onChange={(event) => this.uploadRACIChart(event)} />
+                                    <input require={require} type="file" name="RACIchart" accept="image/*" onChange={(event) => this.uploadRACIChart(event)} />
                                 </div>
                             </div>
                         </FormGroup>
@@ -375,13 +390,13 @@ export default class ProposalForm extends Component {
                                             <small className="text-danger" style={{ marginLeft: 15 + 'px' }}>Not Found</small>
                                         }
                                     </small>
-                                    <Input type="text" value={this.state.supervisor_fullname} id="supervisorName" placeholder="Enter your supervisor's full name" onChange={(event) => this.setSupervisorName(event)} />
+                                    <Input type="text" require={require} maxLength="20" value={this.state.supervisor_fullname} id="supervisorName" placeholder="Enter your supervisor's full name" onChange={(event) => this.setSupervisorName(event)} />
                                 </FormGroup>
                             </Col>
                             <Col xs="6">
                                 <FormGroup>
                                     <small htmlFor="supervisorDesignation">Designation</small>
-                                    <Input type="text" value={this.state.supervisor_designation} id="supervisorDesignation" placeholder="Enter supervisor's designation" onChange={(event) => this.setSupervisorDesignation(event)} />
+                                    <Input require={require} type="text" maxLength="20" value={this.state.supervisor_designation} id="supervisorDesignation" placeholder="Enter supervisor's designation" onChange={(event) => this.setSupervisorDesignation(event)} />
                                 </FormGroup>
                             </Col>
                         </FormGroup>
@@ -397,13 +412,13 @@ export default class ProposalForm extends Component {
                                             <small className="text-danger" style={{ marginLeft: 15 + 'px' }}>Not Found</small>
                                         }
                                     </small>
-                                    <Input type="text" value={this.state.co_supervisor_fullname} id="co-supervisorName" placeholder="Enter your co-supervisor's full name" onChange={(event) => this.setCoSupervisorName(event)} />
+                                    <Input require={require} maxLength="20" type="text" value={this.state.co_supervisor_fullname} id="co-supervisorName" placeholder="Enter your co-supervisor's full name" onChange={(event) => this.setCoSupervisorName(event)} />
                                 </FormGroup>
                             </Col>
                             <Col xs="6">
                                 <FormGroup>
                                     <small htmlFor="co-supervisorDesignation">Designation</small>
-                                    <Input type="text" value={this.state.co_supervisor_designation} id="co-supervisorDesignation" placeholder="Enter co-supervisor's designation" onChange={(event) => this.setCoSupervisorDesignation(event)} />
+                                    <Input require={require} type="text" maxLength="20" value={this.state.co_supervisor_designation} id="co-supervisorDesignation" placeholder="Enter co-supervisor's designation" onChange={(event) => this.setCoSupervisorDesignation(event)} />
                                 </FormGroup>
                             </Col>
                         </FormGroup>
@@ -412,20 +427,21 @@ export default class ProposalForm extends Component {
                             <Col xs="6">
                                 <FormGroup>
                                     <small htmlFor="Ex-supervisorName">External Supervisor Name</small>
-                                    <Input type="text" value={this.state.external_supervisor_fullname} id="Ex-supervisorName" placeholder="Enter your external supervisor's full name" onChange={(event) => this.setExSupervisorName(event)} />
+                                    <Input require={require} maxLength="20" type="text" value={this.state.external_supervisor_fullname} id="Ex-supervisorName" placeholder="Enter your external supervisor's full name" onChange={(event) => this.setExSupervisorName(event)} />
                                 </FormGroup>
                             </Col>
                             <Col xs="6">
                                 <FormGroup>
                                     <small htmlFor="co-supervisorDesignation">Designation</small>
-                                    <Input type="text" value={this.state.external_supervisor_designation} id="co-supervisorDesignation" placeholder="Enter external supervisor's designation" onChange={(event) => this.setExSupervisorDesignation(event)} />
+                                    <Input require={require} maxLength="20" type="text" value={this.state.external_supervisor_designation} id="co-supervisorDesignation" placeholder="Enter external supervisor's designation" onChange={(event) => this.setExSupervisorDesignation(event)} />
                                 </FormGroup>
                             </Col>
                         </FormGroup>
                     </CardBody>
 
                     <CardFooter>
-                        <Button type="submit" size="sm" color="primary" onClick={this.onSubmit.bind(this)}><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                        <Button type="submit" size="sm" color="primary" onClick={this.onSubmit.bind(this)}>
+                            <i className="fa fa-dot-circle-o"></i> Submit</Button>
                     </CardFooter>
                 </Card>
             );
