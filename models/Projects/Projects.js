@@ -48,6 +48,10 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         default: ''
     },
+    marks: {
+        type: Number,
+        default: 0
+    },
     project_submitted_at: {
         type: String,
         default: new Date().toLocaleString()
@@ -61,7 +65,7 @@ module.exports.createProject = function (project, callback) {
 }
 
 module.exports.updateSubmissionOfFinalReport = function (userID, submit, callback) {
-    const query = {submittedBy: userID};
+    const query = { submittedBy: userID };
 
     Project.findOne(query, (err, project) => {
         if (err) throw (err);
@@ -75,12 +79,12 @@ module.exports.updateSubmissionOfFinalReport = function (userID, submit, callbac
 }
 
 
-module.exports.getAllProjects = function(callback) {
+module.exports.getAllProjects = function (callback) {
     Project.find({}, callback);
 
 }
 module.exports.updateSubmissionOfProgressReport = function (userID, submit, callback) {
-    const query = {submittedBy: userID}
+    const query = { submittedBy: userID }
     Project.findOne(query, (err, project) => {
         if (err) throw (err);
         project.set({
@@ -101,3 +105,13 @@ module.exports.getProjectById = function (project_id, callback) {
     Project.findById(project_id, callback);
 }
 
+module.exports.updateMarks = function (_id, marks,callback) {
+    const query = { _id: _id }
+    Project.findOne(query, (err, project) => {
+        if (err) throw err;
+        if (project) {
+            project.marks = marks
+            project.save(callback)
+        }
+    })
+}
