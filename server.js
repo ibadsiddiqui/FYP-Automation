@@ -24,12 +24,14 @@ app.set('views', `${__dirname}/views`);
 // ////////////////////////////////////////admin works
 
 
-const adminDashboard = require('./controllers/Admin/Dashboard')
-const adminManageEligibilities = require('./controllers/Admin/ManageEligibilities')
-const adminManageUsers = require('./controllers/Admin/ManageUsers');
-const adminManageProjects = require('./controllers/Admin/ManageProjects')
-const adminManageFYPList = require('./controllers/Admin/adminManageFYPList')
-const AdmintoogleEligibilities = require('./controllers/Admin/AdmintoggleEligibilities')
+const adminDashboard = require('./controllers/Admin/Dashboard');
+const adminManageEligibilities = require('./controllers/Admin/ManageEligibilities');
+const adminManageUsers = require('./controllers/Admin/ManageUsers');;
+const adminManageProjects = require('./controllers/Admin/ManageProjects');
+const adminManageFYPList = require('./controllers/Admin/adminManageFYPList');
+const AdmintoogleEligibilities = require('./controllers/Admin/AdmintoggleEligibilities');;
+const FYPRemarks = require('./controllers/Project/ProjectRemarks');
+
 app.get('/',  adminDashboard)
 app.get('/manageusers', adminManageUsers)
 app.post('/manageusers', adminManageUsers)
@@ -39,6 +41,8 @@ app.get('/manageeligibilities', adminManageEligibilities)
 app.post('/toggleeligibility', AdmintoogleEligibilities)
 app.get('/manageprojects', adminManageProjects)
 app.post('/manageprojects', adminManageProjects)
+app.get('/remarks', FYPRemarks)
+app.post('/remarks', FYPRemarks)
 ////////////////////////////////////////////////////////
 
 const eligibilityFormSubmission = require('./controllers/EligibilityForm/submitEligibilityForm');
