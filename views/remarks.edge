@@ -76,7 +76,7 @@
                         <div class="col-lg-6" style="margin-top: 12.5px" >
                           <form action="/remarks" method="POST">
 
-                            @if(project.marks === 0 )
+                            @if(project.marks === 0 && project['project_details'].finalReport !== '')
                                 <label for="marks">Give remarks (between 1 - 200)</label>
                                 <input type="number" name="marks" value={{project.marks}} required />
                                 <input type="text" hidden name="project_id" value={{project._id}} />
