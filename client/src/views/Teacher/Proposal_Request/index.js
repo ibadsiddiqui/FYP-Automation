@@ -9,7 +9,7 @@ export default class ProposalRequest extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: 0,
-      requestList: []
+      requestList: [],
     };
   }
 
@@ -37,8 +37,8 @@ export default class ProposalRequest extends Component {
 
   }
   componentDidMount() {
-    // this.timerList = setInterval(this.fetchList(), 1000);
-    this.fetchList()
+    this.timerList = setInterval(() => this.fetchList(), 1000);
+    // this.fetchList()
   }
   accept(text) {
     const name = text
@@ -53,12 +53,6 @@ export default class ProposalRequest extends Component {
         "student_name": name
       })
     })
-    // .then(res => res.json())
-    // .then(async response => {
-    //   // await this.setState({
-    //     requestList: [...response.request_from]
-    //   })
-    // })
   }
   render() {
     return (
