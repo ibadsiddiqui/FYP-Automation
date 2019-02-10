@@ -116,17 +116,17 @@ class Register extends Component {
 
               this.setState({
                 accepted: true,
-                status: 'accepted'
+                status: "accepted"
               })
             } else {
               this.setState({
                 accepted: false,
-                status: 'rejected'
+                status: "rejected"
               })
             }
           } else {
             this.setState({
-              status: 'pending'
+              status: "pending"
             })
           }
         })
