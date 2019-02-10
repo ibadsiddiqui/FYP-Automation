@@ -97,8 +97,8 @@ class Register extends Component {
     }
   }
 
-  // checkEligibility() {
-  //   if (this.state.profession.toLowerCase() !== "teacher" && this.state.username !== "")
+  checkEligibility() {
+    if (this.state.profession.toLowerCase() !== "teacher" && this.state.username !== "")
 
       fetch('/checkElgibilityStatus', {
         method: "POST",
@@ -126,7 +126,7 @@ class Register extends Component {
             }
           } else {
             this.setState({
-              // status: 'pending'
+              status: 'pending'
             })
           }
         })
@@ -135,7 +135,7 @@ class Register extends Component {
     this.setState({
       username: event.target.value
     });
-    // if (event.target.value.toLowerCase() !== "teacher")
+    if (event.target.value.toLowerCase() !== "teacher")
       fetch('/getusername', {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -271,11 +271,11 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text"
-                        {/* placeholder="Enter Your Profession | Student | Teacher "
+                        placeholder="Enter Your Profession | Student | Teacher "
                         required="required"
                         autoFocus="autofocus"
                         value={this.state.profession}
-                        onChange={(event) => this.setProfession(event)} */}
+                        onChange={(event) => this.setProfession(event)}
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -285,11 +285,11 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text"
-                        {/* placeholder="Username - Your CMS-ID"
+                        placeholder="Username - Your CMS-ID"
                         required="required"
                         value={this.state.username}
                         onChange={(event) => this.setUsername(event)} autoComplete="username"
-                        onBlur={(event) => this.checkEligibility()} */}
+                        onBlur={(event) => this.checkEligibility()}
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -335,7 +335,7 @@ class Register extends Component {
                       && this.state.isPasswordValid === true
                       && this.state.confirmPassword === true
                       && !this.state.doesUserNameExist
-                      {/* && (this.state.status === 'accepted' || this.state.profession.toLowerCase() === "teacher") */}
+                      && (this.state.status === 'accepted' || this.state.profession.toLowerCase() === "teacher")
                       &&
                       <Link to="/login">
                         <Button color="success" block onClick={this.onRegister}>Create Account</Button>
