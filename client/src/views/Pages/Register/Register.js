@@ -97,57 +97,59 @@ class Register extends Component {
     }
   }
 
-  checkEligibility(event) {
-    fetch('/checkElgibilityStatus', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify({
-        cms_id: this.state.username,
-      }),
-    }).then(res => res.json())
-      .then(res => {
-        if (res.hasOwnProperty("accepted") === true) {
-          if (res.accepted === true && res.status === 'accepted') {
+  // checkEligibility() {
+  //   if (this.state.profession.toLowerCase() !== "teacher" && this.state.username !== "")
 
-            this.setState({
-              accepted: true,
-              status: 'accepted'
-            })
+      fetch('/checkElgibilityStatus', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          cms_id: this.state.username,
+        }),
+      }).then(res => res.json())
+        .then(res => {
+          if (res.hasOwnProperty("accepted") === true) {
+            if (res.accepted === true && res.status === 'accepted') {
+
+              this.setState({
+                accepted: true,
+                status: 'accepted'
+              })
+            } else {
+              this.setState({
+                accepted: false,
+                status: 'rejected'
+              })
+            }
           } else {
             this.setState({
-              accepted: false,
-              status: 'rejected'
+              // status: 'pending'
             })
           }
-        } else {
-          this.setState({
-            status: ''
-          })
-        }
-      })
+        })
   }
   setUsername(event) {
     this.setState({
       username: event.target.value
     });
-
-    fetch('/getusername', {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify({
-        username: event.target.value,
-      }),
-    })
-      .then(async res => await res.json())
-      .then(res => this.setState({
-        doesUserNameExist: res.response
-      }))
+    // if (event.target.value.toLowerCase() !== "teacher")
+      fetch('/getusername', {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          username: event.target.value,
+        }),
+      })
+        .then(async res => await res.json())
+        .then(res => this.setState({
+          doesUserNameExist: res.response
+        }))
   }
 
 
@@ -204,7 +206,7 @@ class Register extends Component {
 
                       &&
                       <div className="alert alert-danger text-center">
-                        <strong>Sorry!</strong>Profession can only be between Teacher and Student
+                        <strong>Sorry!</strong> Profession can only be between Teacher and Student
                         </div>
                     }
 
@@ -244,7 +246,7 @@ class Register extends Component {
                       &&
                       <div className="alert alert-warning text-center">
                         <strong>Wait!</strong> While the admin confirms your eligibility.
-                        </div>
+                      </div>
                     }
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -261,6 +263,7 @@ class Register extends Component {
                       />
                     </InputGroup>
 
+
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -268,11 +271,11 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text"
-                        placeholder="Username - Your CMS-ID"
+                        {/* placeholder="Enter Your Profession | Student | Teacher "
                         required="required"
-                        value={this.state.username}
-                        onChange={(event) => this.setUsername(event)} autoComplete="username"
-                        onBlur={(event) => this.checkEligibility(event)}
+                        autoFocus="autofocus"
+                        value={this.state.profession}
+                        onChange={(event) => this.setProfession(event)} */}
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -282,11 +285,11 @@ class Register extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text"
-                        placeholder="Enter Your Profession | Student | Teacher "
+                        {/* placeholder="Username - Your CMS-ID"
                         required="required"
-                        autoFocus="autofocus"
-                        value={this.state.profession}
-                        onChange={(event) => this.setProfession(event)}
+                        value={this.state.username}
+                        onChange={(event) => this.setUsername(event)} autoComplete="username"
+                        onBlur={(event) => this.checkEligibility()} */}
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -332,7 +335,7 @@ class Register extends Component {
                       && this.state.isPasswordValid === true
                       && this.state.confirmPassword === true
                       && !this.state.doesUserNameExist
-                      && (this.state.status === 'accepted' ||  this.state.profession.toLowerCase() === "teacher")
+                      {/* && (this.state.status === 'accepted' || this.state.profession.toLowerCase() === "teacher") */}
                       &&
                       <Link to="/login">
                         <Button color="success" block onClick={this.onRegister}>Create Account</Button>
