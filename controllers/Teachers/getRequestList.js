@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
                     }
                     if (!requests) {
 
-                        res.status(200).send(false)
+                        res.status(204).send({request: false})
                     }
                 })
             }
