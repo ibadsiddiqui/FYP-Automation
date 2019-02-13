@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 mongoose.connect('mongodb://localhost/Automation');
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 // template engine for admin and directory 
 app.use(express.static('public'))
