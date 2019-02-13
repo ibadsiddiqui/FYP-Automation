@@ -9,7 +9,7 @@ export default class ProposalRequest extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: 0,
-      requestList: [],
+      requestList: null
     };
   }
 
@@ -30,15 +30,19 @@ export default class ProposalRequest extends Component {
     })
       .then(res => res.json())
       .then(async response => {
-        await this.setState({
-          requestList: [...response.request_from.reverse()]
+        if (response !== false)
+          await this.setState({
+            requestList: [...response.request_from.reverse()]
+          })
+        else this.setState({
+          requestList: false
         })
       })
 
   }
   componentDidMount() {
-    this.timerList = setInterval(() => this.fetchList(), 1000);
-    // this.fetchList()
+    // this.timerList = setInterval(() => this.fetchList(), 1000);
+    this.fetchList()
   }
   accept(text) {
     const name = text
@@ -68,19 +72,28 @@ export default class ProposalRequest extends Component {
                   <Col xs="4">
                     <ListGroup id="list-tab" role="tablist">
                       {
+                        this.state.requestList !== null && this.state.requestList !== false
+                        &&
                         this.state.requestList.map((request, index) => {
-                            return (
-                              <ListGroupItem key={index} onClick={() => this.toggle(index)} action active={this.state.activeTab === index} >
-                                {request.student_name}
-                              </ListGroupItem>
-                            )
+                          return (
+                            <ListGroupItem key={index} onClick={() => this.toggle(index)} action active={this.state.activeTab === index} >
+                              {request.student_id}
+                            </ListGroupItem>
+                          )
                         })
+                      }
+                      {
+                        this.state.requestList === false
+                        &&
+                        <p>No request found</p>
                       }
                     </ListGroup>
                   </Col>
                   <Col xs="8">
                     <TabContent activeTab={this.state.activeTab}>
                       {
+                        this.state.requestList !== null && this.state.requestList !== false
+                        &&
                         this.state.requestList.map((request, index) => {
                           return (
 
